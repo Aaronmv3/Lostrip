@@ -1,0 +1,41 @@
+<div class="card card2">
+    <div class="row ">
+        <div class="col-md-5">
+            <ngb-carousel class="carousel">
+                <ng-template ngbSlide *ngFor="let foto of habitacion.fotosHab">
+                    <div class="picsum-img-wrapper">
+                        <img [src]="foto.url" alt="fotoHabitacion" (click)="openVerticallyCentered(content, foto.url)">
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+        <div class="col-md-7 px-2">
+
+            <h4 class="card-title">{{habitacion.nombreHab}}
+            </h4>
+            <div class="datos">
+                <p class="card-text descripcion">
+                    {{habitacion.capacidad}} x
+                    <fa-icon [icon]="faUsers"></fa-icon>
+                </p>
+                <p class="card-text precio2">{{habitacion.precio}}€/noche</p>
+            </div>
+            <div class="caracteristicas">
+                <p class="caracteristica" *ngFor="let caracteristica of habitacion.caracteristicas">{{caracteristica.caracteristica}}</p>
+                <div class="boton" *ngIf="ruta != '/formulario-alojamiento'">
+                    <button type="button" class="btn btn-outline-danger btn-block btn-sm" *ngIf="ruta != ('/formulario-alojamiento/'+ alojamiento.id)" (click)="solicitar()">Solicita la reserva!</button>
+                </div>
+                <button mat-button class="btn btn-outline-danger boton-borrar" *ngIf="ruta == '/formulario-alojamiento' ||ruta == ('/formulario-alojamiento/'+ alojamiento.id)" (click)="borrarHabitacion(habitacion)">
+                    <fa-icon [icon]="faDelete"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #content let-modal>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    <img src="{{foto}}" alt="foto-modal">
+</ng-template>

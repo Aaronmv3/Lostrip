@@ -1,0 +1,73 @@
+  .footer {
+      position: static;
+      width: 100%;
+  }
+  
+  footer {
+      background: #16222A;
+      background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
+      background: linear-gradient(59deg, #3A6073, #16222A);
+      color: white;
+  }
+  
+  footer a {
+      color: #fff;
+      font-size: 14px;
+      transition-duration: 0.2s;
+  }
+  
+  footer a:hover {
+      color: #FA944B;
+      text-decoration: none;
+  }
+  
+  .copy {
+      font-size: 12px;
+      padding: 10px;
+      border-top: 1px solid #FFFFFF;
+  }
+  
+  .footer-middle {
+      padding-top: 2em;
+      color: white;
+  }
+  
+  ul.social-network {
+      list-style: none;
+      display: inline;
+      margin-left: 0 !important;
+      padding: 0;
+  }
+  
+  ul.social-network li {
+      display: inline;
+      margin: 0 10px;
+  }
+  
+  .cookies {
+      position: fixed;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.74);
+      width: 100%;
+      text-align: center;
+  }
+  
+  .cookies button {
+      position: absolute;
+      left: 75%;
+      bottom: 10px;
+  }
+  
+  .cookies p {
+      width: 45%;
+      position: relative;
+      left: 25%;
+      padding: 10px;
+  }
+  
+  @media(max-width:330px) {
+      .cookies button {
+          position: relative;
+          left: 0;
+      }
+  }

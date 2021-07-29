@@ -1,0 +1,68 @@
+<div class="spinner" *ngIf="load">
+    <img src="/assets/Imagenes/Spinner_avion.gif" />
+</div>
+<div class="alojamientMostrar" *ngIf="!load">
+    <div class="atras">
+        <p (click)="atras()">
+            <fa-icon [icon]="faArrowLeft"></fa-icon> Volver</p>
+
+    </div>
+    <div class="info-alojamiento animated fadeIn">
+        <div class="grid-gallery">
+            <a class="grid-gallery__item" *ngFor="let foto of alojamiento.fotos">
+                <img class="grid-gallery__image" [src]="foto.url" (click)="openVerticallyCentered(content, foto.url)">
+            </a>
+            <a class="grid-gallery__item" *ngFor="let foto of alojamiento.fotos">
+                <img class="grid-gallery__image" [src]="foto.url" (click)="openVerticallyCentered(content, foto.url)">
+            </a>
+            <a class="grid-gallery__item" *ngFor="let foto of alojamiento.fotos">
+                <img class="grid-gallery__image" [src]="foto.url" (click)="openVerticallyCentered(content, foto.url)">
+            </a>
+        </div>
+        <ngb-carousel class="carousel1">
+            <ng-template ngbSlide *ngFor="let foto of alojamiento.fotos">
+                <div class="picsum-img-wrapper">
+                    <img [src]="foto.url" alt="fotoAlojamiento" (click)="openVerticallyCentered(content, foto.url)">
+                </div>
+            </ng-template>
+        </ngb-carousel>
+        <div class="encabezado">
+            <h1>{{alojamiento.nombre}}</h1>
+            <div class="estrellas">
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                </ng-template>
+                <ngb-rating class="estrellas" [(rate)]="alojamiento.estrellas" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+            </div>
+            <div class="oferta" [ngStyle]="alojamiento.oferta?{'color':'red', 'font-size': '25px'}:{'display':'none'}">
+                <fa-icon [icon]="faGift"></fa-icon>
+            </div>
+        </div>
+        <div class="mapa"><iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11798.251790163413!2d-7.8612776!3d42.3305198!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd2ffec586600ee7%3A0x5b85695de46459ca!2zQ2Fmw6kgUGFjw61maWNv!5e0!3m2!1ses!2ses!4v1624399734753!5m2!1ses!2ses"
+                style="border:0;" allowfullscreen="" loading="lazy"></iframe></div>
+        <div class="descripcion">
+            <h1>Descripcion</h1>
+            <p> {{alojamiento.descripcion}}</p>
+        </div>
+        <div class="habitaciones">
+            <h1>Habitaciones</h1>
+            <app-habitacion-tarjeta [habitacion]="habitaciones" [usuario]="obtenerUsuario" [alojamiento]="alojamiento" *ngFor="let habitaciones of alojamiento.habitaciones"></app-habitacion-tarjeta>
+        </div>
+        <div class="comentarios">
+            <h1>Comentarios</h1>
+            <app-comentario-tarjeta [comentarios]="comentarios" *ngFor="let comentarios of alojamiento.comentarios"></app-comentario-tarjeta>
+        </div>
+    </div>
+</div>
+
+
+
+
+<ng-template #content let-modal>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    <img src="{{foto}}" alt="foto-modal">
+</ng-template>

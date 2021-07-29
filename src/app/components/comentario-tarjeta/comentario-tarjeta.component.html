@@ -1,0 +1,7 @@
+<div class="comentarios" *ngIf="!load">
+    <div class="datosUsuario">
+        <img [src]="usuario.fotoPerfil" alt="foto">
+        <p class="nombre">{{usuario.nombre}}</p>
+    </div>
+    <p class="comentario text-secondary">"{{comentarios.comentario}}"</p>
+</div>

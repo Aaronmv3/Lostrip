@@ -1,0 +1,28 @@
+.comentarios {
+    border: 1px #3A6073 solid;
+    border-radius: 15px 10px 10px 10px;
+    margin-bottom: 4%;
+}
+
+.datosUsuario {
+    display: flex;
+    flex-direction: row;
+}
+
+.nombre {
+    font-size: 15px;
+    font-weight: bold;
+    color: black;
+    margin-left: 2%;
+    position: relative;
+}
+
+.comentarios img {
+    width: 40px;
+    height: 40px;
+    border-radius: 15px 30px 30px 30px;
+}
+
+.comentario {
+    margin-left: 11%;
+}

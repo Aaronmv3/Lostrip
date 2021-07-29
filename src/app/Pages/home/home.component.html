@@ -1,0 +1,34 @@
+<div id="search" class="section">
+    <div class="section-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="encabezado-form">
+                        <h1>Tu proximo viaje esta mas cerca que nunca</h1>
+                        <p>Disfruta de esas merecidas vacaciones con nuestros precios y nuestros mas de 500 alojamientos.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 col-md-pull-7">
+                    <div class="search-form">
+                        <app-formulario-busqueda></app-formulario-busqueda>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-carousel></app-carousel>
+<div class="tarjetas">
+    <h4>Mejores ofertas de hoy</h4>
+    <div class="linea"></div>
+    <div class="card-group">
+        <app-alojamiento-tarjeta class="tarjeta" [Alojamiento]="Alojamiento" [index]="i" *ngFor="let Alojamiento of AlojamientosOferta; let i = index"></app-alojamiento-tarjeta>
+    </div>
+</div>
+<div class="tarjetas">
+    <h4>Nuestras recomendaciones</h4>
+    <div class="linea"></div>
+    <div class="card-group">
+        <app-alojamiento-tarjeta class="tarjeta" [Alojamiento]="Alojamiento" [index]="i" *ngFor="let Alojamiento of alojamientos; let i = index"></app-alojamiento-tarjeta>
+    </div>
+</div>

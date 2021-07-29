@@ -1,0 +1,30 @@
+<div class="spinner" *ngIf="load">
+    <img src="/assets/Imagenes/Spinner_avion.gif" />
+</div>
+
+<div class="muestraAlojamientos" *ngIf="!load">
+    <div class="formularios">
+        <div class="formularioBusqueda">
+            <app-formulario-busqueda (resultForm)="obtenerBusqueda($event)"></app-formulario-busqueda>
+        </div>
+        <div class="filtrosBusqueda">
+            <form [formGroup]="shortByForm" class="form-mat-sort">
+                <mat-form-field appearance="fill" class="selectorOrden">
+                    <mat-label class="texto-mat">Ordenar por:</mat-label>
+                    <mat-select class="texto-mat" formControlName="shortBy" disableRipple>
+                        <mat-option class="option-mat" *ngFor="let orden of ordenado" [value]="orden" (click)="ordenarAlojamientos()">
+                            {{orden}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </form>
+            <app-filtros-busqueda class="filtros-app"></app-filtros-busqueda>
+        </div>
+    </div>
+    <div class="informacionBusqueda">
+        <h1>{{busqueda.busqueda}}: {{alojamientos.length}} alojamientos</h1>
+        <div class="card-group">
+            <app-alojamiento-tarjeta class="tarjeta" [Alojamiento]="Alojamiento" [habitaciones]="this.busqueda.numHabitaciones" *ngFor="let Alojamiento of alojamientos | sortBy: ordenacion: valor"></app-alojamiento-tarjeta>
+        </div>
+    </div>
+</div>

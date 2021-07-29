@@ -1,0 +1,64 @@
+<footer class="mainfooter footer" role="contentinfo">
+    <div class="footer-middle">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-pad">
+                        <h4>Nosotros</h4>
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="#"></a>
+                            </li>
+                            <li><a href="#">Contacto</a></li>
+                            <li><a href="#">Quienes somos?</a></li>
+                            <li><a href="#">Politica de empresa</a></li>
+                            <li><a href="#">Preguntas frecuentes</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-pad">
+                        <h4>Privacidad</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Politica de privacidad</a></li>
+                            <li><a href="#">Politica de cookies</a></li>
+                            <li><a href="#">Seguridad</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h4>Nuestras redes sociales</h4>
+                    <ul class="social-network">
+                        <li>
+                            <a href="#" title="Facebook">
+                                <fa-icon [icon]="faFacebookF"></fa-icon>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="Linkedin">
+                                <fa-icon [icon]="faTwitter"></fa-icon>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" title="Google+">
+                                <fa-icon [icon]="faGooglePlus"></fa-icon>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 copy">
+                    <p class="text-center">&copy; Copyright 2020 - Lostrip. Todos los derechos reservados.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="cookies" [ngStyle]="{'display':aceptada}">
+        <p>Las cookies de este sitio se usan para personalizar el contenido y los anuncios para ofrecer funciones de medios sociales y para analizar el tráfico.
+            <a href="#">Mas información</a>
+        </p>
+        <button (click)="aceptarCookies()" type="button" class="btn btn-outline-warning">Aceptar</button>
+    </div>
+</footer>

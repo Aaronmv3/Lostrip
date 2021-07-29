@@ -1,0 +1,75 @@
+<div class="card animated fadeInRight card1" *ngIf="this.ruta == '/home'">
+    <div class="card-img"><img [src]="Alojamiento.fotos[0].url" [alt]="Alojamiento.nombre"></div>
+    <div class="card-body">
+        <h5>{{Alojamiento.nombre}}
+            <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+          <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                </span>
+            </ng-template>
+
+            <ngb-rating class="estrellas" [(rate)]="Alojamiento.estrellas" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+        </h5>
+        <h6 class="pt-1 pb-2 descripcion">{{Alojamiento.descripcion}}</h6>
+        <p *ngIf="this.ruta == '/experiencias' || this.ruta == '/alojamientos'">{{Alojamiento.descripcion}}</p>
+        <button *ngIf="this.ruta == '/alojamientos' || this.ruta == '/home'" (click)="verAlojamiento()" type="button" class="btn btn-outline-danger btn-block btn-sm">Descubre este alojamiento</button>
+        <button *ngIf="this.ruta == '/experiencias'" (click)="verExperiencia()" type="button" class="btn btn-outline-danger btn-block btn-sm">Descubre esta experiencia</button>
+    </div>
+</div>
+
+<div class="card animated fadeInRight card2" *ngIf="this.ruta == '/alojamientos' || this.ruta == '/experiencias' || this.ruta == '/formulario-alojamiento'">
+    <div class="row ">
+        <div class="col-md-7 px-3">
+
+            <h4 class="card-title">{{Alojamiento.nombre}}
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                </ng-template>
+
+                <ngb-rating class="estrellas" [(rate)]="Alojamiento.estrellas" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+            </h4>
+            <p class="card-text descripcion">
+                {{Alojamiento.descripcion}}
+            </p>
+            <p class="card-text precio2" *ngIf="Alojamiento.habitaciones != undefined">{{Alojamiento.habitaciones[0].precio * this.habitaciones}}€/noche</p>
+            <p class="card-text valoracion">{{this.puntuacion}} <span class="puntuacion">{{this.Alojamiento.valoracion}}</span></p>
+            <div class="boton">
+                <button *ngIf="this.ruta == '/alojamientos' || this.ruta == '/home'" (click)="verAlojamiento()" type="button" class="btn btn-outline-danger btn-block btn-sm ">Descubre este alojamiento</button>
+                <button *ngIf="this.ruta == '/experiencias'" (click)="verExperiencia()" type="button" class="btn btn-outline-danger btn-block btn-sm ">Descubre esta experiencia</button>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <ngb-carousel class="carousel">
+                <ng-template ngbSlide *ngFor="let foto of Alojamiento.fotos">
+                    <div class="picsum-img-wrapper">
+                        <img [src]="foto.url" alt="fotoAlojamiento">
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+</div>
+<div *ngIf="Alojamiento != null && this.ruta == '/perfil'">
+    <div class="container alojamientos">
+        <div class="row">
+            <div class="col">
+                <p><img [src]="Alojamiento.fotos[0].url" alt="alojamiento" width="150px" height="150px"></p>
+            </div>
+            <div class="col">
+                <p>{{Alojamiento.nombre}}</p>
+            </div>
+            <div class="col" *ngIf="Alojamiento.habitaciones != undefined">
+                <p>{{propietario.nombre}}</p>
+            </div>
+            <div class="col botones">
+                <button class="btn btn-danger" *ngIf="Alojamiento.habitaciones != undefined" (click)="borrarAlojamiento(Alojamiento)"> <fa-icon [icon]="faTrashAlt" ></fa-icon></button>
+                <button class="btn btn-primary" *ngIf="Alojamiento.habitaciones != undefined" (click)="abrirFormularioAlojamiento(Alojamiento)"> <fa-icon [icon]="faEdit"></fa-icon></button>
+                <button class="btn btn-danger" *ngIf="Alojamiento.habitaciones == undefined" (click)="borrarExperiencia(Alojamiento)"> <fa-icon [icon]="faTrashAlt" ></fa-icon></button>
+                <button class="btn btn-primary" *ngIf="Alojamiento.habitaciones == undefined" (click)="abrirFormularioExperiencia(Alojamiento)"> <fa-icon [icon]="faEdit"></fa-icon></button>
+            </div>
+        </div>
+    </div>
+
+</div>

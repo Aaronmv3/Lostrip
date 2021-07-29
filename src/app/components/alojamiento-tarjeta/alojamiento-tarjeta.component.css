@@ -1,0 +1,152 @@
+img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.card1 {
+    border-radius: 5px !important;
+    min-height: 400px;
+}
+
+.card2 {
+    margin-bottom: 20px;
+    width: 119%;
+    border: grey 1px solid;
+    padding: 5px;
+}
+
+.descripcion {
+    font-size: 13px;
+}
+
+h5 {
+    font-size: 25px;
+    text-decoration: black underline;
+    line-height: 27px;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+.card-title {
+    font-size: 30px;
+    padding: 5px;
+    text-decoration: black underline 2px;
+    text-align: center;
+}
+
+.card-text {
+    margin-left: 5px;
+}
+
+.descripcion {
+    font-size: 15px;
+}
+
+.boton {
+    margin: 3px;
+    position: relative;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.card-block {
+    width: 38vw;
+}
+
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 1.6rem;
+    color: #d3d3d3;
+}
+
+.estrellas {
+    margin-left: 2%;
+}
+
+.full {
+    color: rgb(218, 218, 0);
+}
+
+.half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: rgb(218, 218, 0);
+}
+
+.puntuacion {
+    background-color: rgb(78, 78, 197);
+    color: white;
+    padding: 5px;
+    border-radius: 10% 5%;
+}
+
+.valoracion {
+    color: blue;
+    font-size: 18px;
+}
+
+.precio2 {
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.carousel img {
+    max-width: 500px;
+    max-height: 280px;
+    min-height: 220px;
+}
+
+
+/* Perfil */
+
+.alojamientos {
+    text-align: center;
+    margin-top: 2%;
+    border-bottom: rgb(48, 48, 48) 1px solid;
+    vertical-align: middle;
+    padding-bottom: 1%;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+}
+
+.alojamientos p {
+    text-decoration: black underline;
+    font-size: 17px;
+    line-height: 5 !important;
+}
+
+@media(max-width: 1425px) {
+    .alojamientos p {
+        line-height: 1.5 !important;
+    }
+}
+
+@media(max-width: 1090px) {
+    .card2 {
+        width: 115%;
+    }
+}
+
+@media(max-width: 990px) {
+    .card2 {
+        width: 100%;
+    }
+}
+
+@media(max-width: 776px) {
+    .carousel img {
+        max-width: 600px;
+        max-height: 500px;
+        min-height: 200px;
+    }
+    .card1 {
+        max-height: 300px;
+    }
+}

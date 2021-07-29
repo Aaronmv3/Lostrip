@@ -1,0 +1,19 @@
+<form [formGroup]="filterForm">
+    <mat-expansion-panel (opened)="filtroPanelOpenState = true" (closed)="filtroPanelOpenState = false" [ngClass]="filterList.selectedOptions.selected.length > 0 ? 'active-filter-width' : 'no-filter-width'">
+        <mat-expansion-panel-header [ngClass]="{'active-filter-bg': filterList.selectedOptions.selected.length > 0}">
+            <mat-panel-title [ngClass]="{'active-filter-text': filterList.selectedOptions.selected.length > 0}">
+                Filtros
+            </mat-panel-title>
+            <mat-panel-description [ngClass]="{'active-filter-text': filterList.selectedOptions.selected.length > 0}">
+            </mat-panel-description>
+        </mat-expansion-panel-header>
+        <mat-selection-list #filterList formControlName="filtros">
+            <div *ngIf="this.ruta == '/alojamientos'">
+                <mat-list-option (click)="enviar()" *ngFor="let filtro of filtros" [value]="filtro">{{filtro}}</mat-list-option>
+            </div>
+            <div *ngIf="this.ruta == '/experiencias'">
+                <mat-list-option (click)="enviar()" *ngFor="let filtro of filtros2" [value]="filtro">{{filtro}}</mat-list-option>
+            </div>
+        </mat-selection-list>
+    </mat-expansion-panel>
+</form>

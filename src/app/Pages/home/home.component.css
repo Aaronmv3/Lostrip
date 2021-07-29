@@ -1,0 +1,102 @@
+* {
+    box-sizing: border-box;
+}
+
+.section {
+    position: relative;
+    height: 100vh;
+}
+
+#search {
+    background-image: url('/assets/Imagenes/playa.jpg');
+    background-attachment: fixed;
+}
+
+.section .section-center {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.search-form {
+    background-color: #fff;
+    padding: 50px 20px;
+    box-shadow: 0px 5px 20px -5px rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+.linea {
+    border: 1px solid #ccc;
+    margin-bottom: 2px;
+}
+
+img {
+    width: 100%;
+}
+
+h4 {
+    text-align: center;
+    font-size: 30px;
+    color: red;
+    margin-top: 20px;
+}
+
+.tarjeta {
+    width: 20%;
+    margin-top: 4px;
+}
+
+.tarjetas {
+    padding: 20px;
+}
+
+.encabezado-form {
+    width: 60%;
+    position: absolute;
+}
+
+.encabezado-form h1 {
+    font-size: 52px;
+    text-transform: uppercase;
+    color: white;
+    font-weight: 700;
+}
+
+.encabezado-form p {
+    font-size: 16px;
+    color: rgb(226, 213, 213);
+    float: left;
+}
+
+@media(max-width:991px) {
+    .search-form {
+        width: 160%;
+    }
+}
+
+@media(max-width:767px) {
+    .search-form {
+        width: auto;
+    }
+}
+
+html::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+
+html::-webkit-scrollbar:vertical {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-button:increment,
+html::-webkit-scrollbar-button {
+    display: none;
+}
+
+html::-webkit-scrollbar-thumb {
+    background-color: #797979;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}

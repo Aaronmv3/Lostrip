@@ -1,0 +1,44 @@
+<div class="usuarios" *ngIf="cargado == true">
+    <div class="cabecera-datos">
+        <div class="titulos">
+            <h1 class="titulo">Usuarios</h1>
+            <h2 class="subtitulo">Listado de usuarios</h2>
+        </div>
+    </div>
+    <div class="tabla-usuarios">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rol</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let usuario of usuarios; let i = index">
+                    <th>{{usuario.nombre}} {{usuario.apellidos}}</th>
+                    <td>{{usuario.email}}</td>
+                    <td *ngIf="!actualizarRol || (usuario.userID == usuarioActual.userID) == true">{{usuario.usuarioRol}}</td>
+                    <td *ngIf="actualizarRol && (usuario.userID == usuarioActual.userID) == false">
+                        <form [formGroup]="formularioRol" class="formulario-rol">
+                            <select class="form-select" aria-label="roles" formControlName="rol">
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="PROPIETARIO">PROPIETARIO</option>
+                        <option value="NORMAL" selected>NORMAL</option>
+                      </select>
+                        </form>
+                    </td>
+                    <td>
+                        <div class="botones" *ngIf="(usuario.userID == usuarioActual.userID) == false">
+                            <button class="btn btn-danger" *ngIf="!actualizarRol" (click)="borrarCuenta()"> <fa-icon [icon]="faTrashAlt" ></fa-icon></button>
+                            <button class="btn btn-primary" *ngIf="!actualizarRol" (click)="actualizarRol = true"> <fa-icon [icon]="faEdit"></fa-icon></button>
+                            <button class="btn btn-danger" *ngIf="actualizarRol" (click)="actualizarRol = false"><fa-icon [icon]="faTimes"></fa-icon></button>
+                            <button class="btn btn-primary" *ngIf="actualizarRol" (click)="actualizarRoles(i)"><fa-icon [icon]="faSave"></fa-icon></button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

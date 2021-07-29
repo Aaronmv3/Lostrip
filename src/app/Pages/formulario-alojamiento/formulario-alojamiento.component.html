@@ -1,0 +1,433 @@
+<div class="formulario animated fadeIn horizontal">
+    <mat-horizontal-stepper [linear]="true" #stepper *ngIf="mostrar">
+        <mat-step [stepControl]="AlojamientoFormulario">
+            <form [formGroup]="AlojamientoFormulario">
+                <ng-template matStepLabel>Creacion de alojamiento</ng-template>
+                <div class="grid-formulario">
+                    <div class="datos">
+                        <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Nombre del alojamiento" formControlName="nombreAloj" required/>
+                            <mat-error *ngIf="nombreAloj.invalid && (nombreAloj.dirty || nombreAloj.touched)">
+                                <div *ngIf="nombreAloj.errors?.required">
+                                    El nombre es obligatorio
+                                </div>
+                                <div *ngIf="nombreAloj.errors?.minlength">
+                                    El nombre debe tener 3 caracteres como minimo.
+                                </div>
+                                <div *ngIf="nombreAloj.errors?.maxlength">
+                                    El nombre no puede tener mas de 25 caracteres.
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                        <p>
+                            <mat-form-field class="chip-list">
+                                <mat-label>Descripcion</mat-label>
+                                <textarea matInput placeholder="Ej. Se encuentra en..." formControlName="descripcionAloj" required></textarea>
+                                <mat-error *ngIf="descripcionAloj.invalid && (descripcionAloj.dirty || descripcionAloj.touched)">
+                                    <div *ngIf="descripcionAloj.errors?.required">
+                                        La descripcion es obligatoria
+                                    </div>
+                                    <div *ngIf="descripcionAloj.errors?.minlength">
+                                        La descripcion debe tener 20 caracteres como minimo.
+                                    </div>
+                                    <div *ngIf="descripcionAloj.errors?.maxlength">
+                                        La descripcion no puede tener mas de 200 caracteres.
+                                    </div>
+                                </mat-error>
+                                <mat-hint align="end">{{descripcionAloj.value.length}} / 200</mat-hint>
+                            </mat-form-field>
+                        </p>
+                        <div class="campos-numericos">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ubicación</mat-label>
+                                <mat-select [formControl]="localizacion">
+                                    <mat-option *ngFor="let provincia of provincias" [value]="provincia">
+                                        {{provincia}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="localizacion.invalid && (localizacion.dirty || localizacion.touched)">
+                                    <div *ngIf="localizacion.errors?.required">
+                                        La localizacion es obligatoria
+                                    </div>
+                                    <div *ngIf="localizacion.errors?.minlength">
+                                        La localizacion debe tener 3 caracteres como minimo.
+                                    </div>
+                                    <div *ngIf="localizacion.errors?.maxlength">
+                                        La localizacion no puede tener mas de 20 caracteres.
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="numerico">
+                                <mat-label>Estrellas</mat-label>
+                                <input matInput type="number" placeholder="Ej. 3" [formControl]="estrellas" max="5" min="1">
+                                <mat-hint align="start"><strong>Estrellas del alojamiento</strong> </mat-hint>
+                                <mat-error *ngIf="estrellas.invalid && (estrellas.dirty || estrellas.touched)">
+                                    <div *ngIf="estrellas.errors?.required">
+                                        Las estrellas son obligatorias
+                                    </div>
+                                    <div *ngIf="estrellas.errors?.minlength">
+                                        El alojamiento debe tener 1 estrella como minimo.
+                                    </div>
+                                    <div *ngIf="estrellas.errors?.maxlength">
+                                        El alojamiento no puede tener mas de 5 estrellas.
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <p class="oferta">
+                            <mat-slide-toggle formControlName="oferta" class="example-margin" color="primary" checked="false">
+                                Oferta
+                            </mat-slide-toggle>
+                        </p>
+                    </div>
+                    <div class="filtros">
+                        <mat-form-field class="chip-list">
+                            <mat-chip-list #chipList aria-label="Selector de filtros">
+                                <mat-chip *ngFor="let filtro of filtros" (removed)="removeFiltro(filtro)">
+                                    {{filtro.filtros}}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Nuevo filtro..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addFiltro($event)">
+                            </mat-chip-list>
+                        </mat-form-field>
+                    </div>
+                    <div class="fotos">
+                        <button mat-button class="btn btn-outline-warning boton-subida" (click)="subirFotoAlojamiento()">
+                            Seleccionar fotos &nbsp;<fa-icon [icon]="faUpload"></fa-icon>
+                        </button>
+                        <br>
+                        <div *ngIf="mostrarFotosAlojamiento" class="imagenesAlojamiento">
+                            <div *ngFor="let foto of fotosAlojamiento" class="imagen">
+                                <img [src]="foto.url" [alt]="foto.imagenId" width="125px" height="75px">
+                                <mat-icon class="icono-cerrar" (click)="borrarFotoAlojamiento(foto)">highlight_off</mat-icon>
+                            </div>
+                        </div>
+                        <input type="file" id="fileUpload" name="fileUpload" multiple accept="image/*" style="display: none;" />
+                    </div>
+                </div>
+                <div class="boton-primero boton">
+                    <button mat-button matStepperNext class="btn btn-success" (click)="crearAlojamiento()">Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="HabitacionFormulario" label="Creacion de habitaciones">
+            <form [formGroup]="HabitacionFormulario">
+                <div class="grid-formulario">
+                    <div class="datos">
+                        <mat-form-field>
+                            <mat-label>Nombre de la habitacion</mat-label>
+                            <input matInput formControlName="nombreHab" placeholder="Nombre de la habitacion" required/>
+                            <mat-error *ngIf="nombreHab.invalid && (nombreHab.dirty || nombreHab.touched)">
+                                <div *ngIf="nombreHab.errors?.required">
+                                    El nombre es obligatorio
+                                </div>
+                                <div *ngIf="nombreHab.errors?.minlength">
+                                    El nombre debe tener 3 caracteres como minimo.
+                                </div>
+                                <div *ngIf="nombreHab.errors?.maxlength">
+                                    El nombre no puede tener mas de 25 caracteres.
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <div class="campos-numericos">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Huespedes</mat-label>
+                                <input matInput type="number" placeholder="Ej. 3" [formControl]="capacidad" max="8" min="1">
+                                <mat-hint align="start"><strong>Capacidad maxima</strong> </mat-hint>
+                                <mat-error *ngIf="capacidad.invalid && (capacidad.dirty || capacidad.touched)">
+                                    <div *ngIf="capacidad.errors?.required">
+                                        La capacidad es obligatoria
+                                    </div>
+                                    <div *ngIf="capacidad.errors?.minlength">
+                                        El alojamiento debe poder albergar 1 persona como minimo.
+                                    </div>
+                                    <div *ngIf="capacidad.errors?.maxlength">
+                                        El alojamiento no puede albergar mas de 8 personas.
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="numerico">
+                                <mat-label>Precio</mat-label>
+                                <input matInput type="number" class="right-align" formControlName="precio">
+                                <span matPrefix>€&nbsp;</span>
+                                <span matSuffix>.00</span>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="filtros">
+                        <mat-form-field class="chip-list">
+                            <mat-chip-list #listaCarac aria-label="Selector de caracteristicas">
+                                <mat-chip *ngFor="let caracteristica of caracteristicas" (removed)="removeCaracteristica(caracteristica)">
+                                    {{caracteristica.caracteristica}}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Nueva caracteritica..." [matChipInputFor]="listaCarac" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addCaracteristica($event)">
+                            </mat-chip-list>
+                        </mat-form-field>
+                    </div>
+                    <div class="fotos">
+                        <button mat-button class="btn btn-outline-warning boton-subida" (click)="subirFotoHabitacion()">
+                            Seleccionar fotos &nbsp;<fa-icon [icon]="faUpload"></fa-icon>
+                        </button>
+                        <br>
+                        <div *ngIf="mostrarFotosHabitacion" class="imagenesAlojamiento">
+                            <div *ngFor="let foto of fotosHabitacion" class="imagen">
+                                <img [src]="foto.url" [alt]="foto.imagenId" width="125px" height="75px">
+                                <mat-icon class="icono-cerrar" (click)="borrarFotoHabitacion(foto)">highlight_off</mat-icon>
+                            </div>
+                        </div>
+                        <input type="file" id="fileUploadH" name="fileUploadH" multiple accept="image/*" style="display: none;" />
+                    </div>
+                </div>
+                <div class="botones-segundo boton">
+                    <button mat-button matStepperPrevious class="btn btn-warning">Atras</button>
+                    <button type="reset" (click)="anadirHabitacion()" class="btn btn-primary">Crear habitación</button>
+                    <button mat-button matStepperNext class="btn btn-success">Siguiente</button>
+                </div>
+
+                <div class="habitaciones" *ngIf="mostrarHabitaciones">
+                    <h1>Habitaciones creadas</h1>
+                    <app-habitacion-tarjeta [habitacion]="habitacion" [alojamiento]="alojamiento" *ngFor="let habitacion of habitaciones" (borrar)="borrarHabitacion($event)"></app-habitacion-tarjeta>
+                </div>
+            </form>
+
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Listo!</ng-template>
+            <h1 class="titulo-final">Resumen</h1>
+            <h2>Alojamiento</h2>
+            <div class="alojamiento-resumen" *ngIf="alojamiento != undefined">
+                <app-alojamiento-tarjeta [Alojamiento]="alojamiento"></app-alojamiento-tarjeta>
+            </div>
+            <h2>Habitaciones</h2>
+            <div class="habitaciones">
+                <app-habitacion-tarjeta [habitacion]="habitacion" [alojamiento]="alojamiento" *ngFor="let habitacion of habitaciones" (borrar)="borrarHabitacion($event)"></app-habitacion-tarjeta>
+            </div>
+            <div class="botones-tercero boton">
+                <button mat-button matStepperPrevious class="btn btn-warning">Atras</button>
+                <button mat-button class="btn btn-success" (click)="guardarAlojamiento()">Crear/guardar</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>
+
+<div class="formulario animated fadeIn vertical">
+    <mat-vertical-stepper [linear]="true" #stepper *ngIf="mostrar">
+        <mat-step [stepControl]="AlojamientoFormulario">
+            <form [formGroup]="AlojamientoFormulario">
+                <ng-template matStepLabel>Creacion de alojamiento</ng-template>
+                <div class="grid-formulario">
+                    <div class="datos">
+                        <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input matInput placeholder="Nombre del alojamiento" formControlName="nombreAloj" required/>
+                            <mat-error *ngIf="nombreAloj.invalid && (nombreAloj.dirty || nombreAloj.touched)">
+                                <div *ngIf="nombreAloj.errors?.required">
+                                    El nombre es obligatorio
+                                </div>
+                                <div *ngIf="nombreAloj.errors?.minlength">
+                                    El nombre debe tener 3 caracteres como minimo.
+                                </div>
+                                <div *ngIf="nombreAloj.errors?.maxlength">
+                                    El nombre no puede tener mas de 25 caracteres.
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+                        <p>
+                            <mat-form-field class="chip-list">
+                                <mat-label>Descripcion</mat-label>
+                                <textarea matInput placeholder="Ej. Se encuentra en..." formControlName="descripcionAloj" required></textarea>
+                                <mat-error *ngIf="descripcionAloj.invalid && (descripcionAloj.dirty || descripcionAloj.touched)">
+                                    <div *ngIf="descripcionAloj.errors?.required">
+                                        La descripcion es obligatoria
+                                    </div>
+                                    <div *ngIf="descripcionAloj.errors?.minlength">
+                                        La descripcion debe tener 20 caracteres como minimo.
+                                    </div>
+                                    <div *ngIf="descripcionAloj.errors?.maxlength">
+                                        La descripcion no puede tener mas de 200 caracteres.
+                                    </div>
+                                </mat-error>
+                                <mat-hint align="end">{{descripcionAloj.value.length}} / 200</mat-hint>
+                            </mat-form-field>
+                        </p>
+                        <div class="campos-numericos">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Ubicación</mat-label>
+                                <mat-select [formControl]="localizacion">
+                                    <mat-option *ngFor="let provincia of provincias" [value]="provincia">
+                                        {{provincia}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="localizacion.invalid && (localizacion.dirty || localizacion.touched)">
+                                    <div *ngIf="localizacion.errors?.required">
+                                        La localizacion es obligatoria
+                                    </div>
+                                    <div *ngIf="localizacion.errors?.minlength">
+                                        La localizacion debe tener 3 caracteres como minimo.
+                                    </div>
+                                    <div *ngIf="localizacion.errors?.maxlength">
+                                        La localizacion no puede tener mas de 20 caracteres.
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="numerico">
+                                <mat-label>Estrellas</mat-label>
+                                <input matInput type="number" placeholder="Ej. 3" [formControl]="estrellas" max="5" min="1">
+                                <mat-hint align="start"><strong>Estrellas del alojamiento</strong> </mat-hint>
+                                <mat-error *ngIf="estrellas.invalid && (estrellas.dirty || estrellas.touched)">
+                                    <div *ngIf="estrellas.errors?.required">
+                                        Las estrellas son obligatorias
+                                    </div>
+                                    <div *ngIf="estrellas.errors?.minlength">
+                                        El alojamiento debe tener 1 estrella como minimo.
+                                    </div>
+                                    <div *ngIf="estrellas.errors?.maxlength">
+                                        El alojamiento no puede tener mas de 5 estrellas.
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <p class="oferta">
+                            <mat-slide-toggle formControlName="oferta" class="example-margin" color="primary" checked="false">
+                                Oferta
+                            </mat-slide-toggle>
+                        </p>
+                    </div>
+                    <div class="filtros">
+                        <mat-form-field class="chip-list">
+                            <mat-chip-list #chipList aria-label="Selector de filtros">
+                                <mat-chip *ngFor="let filtro of filtros" (removed)="removeFiltro(filtro)">
+                                    {{filtro.filtros}}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Nuevo filtro..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addFiltro($event)">
+                            </mat-chip-list>
+                        </mat-form-field>
+                    </div>
+                    <div class="fotos">
+                        <button mat-button class="btn btn-outline-warning boton-subida" (click)="subirFotoAlojamiento()">
+                            Seleccionar fotos &nbsp;<fa-icon [icon]="faUpload"></fa-icon>
+                        </button>
+                        <br>
+                        <div *ngIf="mostrarFotosAlojamiento" class="imagenesAlojamiento">
+                            <div *ngFor="let foto of fotosAlojamiento" class="imagen">
+                                <img [src]="foto.url" [alt]="foto.imagenId" width="125px" height="75px">
+                                <mat-icon class="icono-cerrar" (click)="borrarFotoAlojamiento(foto)">highlight_off</mat-icon>
+                            </div>
+                        </div>
+                        <input type="file" id="fileUpload" name="fileUpload" multiple accept="image/*" style="display: none;" />
+                    </div>
+                </div>
+                <div class="boton-primero boton">
+                    <button mat-button matStepperNext class="btn btn-success" (click)="crearAlojamiento()">Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [stepControl]="HabitacionFormulario" label="Creacion de habitaciones">
+            <form [formGroup]="HabitacionFormulario">
+                <div class="grid-formulario">
+                    <div class="datos">
+                        <mat-form-field>
+                            <mat-label>Nombre de la habitacion</mat-label>
+                            <input matInput formControlName="nombreHab" placeholder="Nombre de la habitacion" required/>
+                            <mat-error *ngIf="nombreHab.invalid && (nombreHab.dirty || nombreHab.touched)">
+                                <div *ngIf="nombreHab.errors?.required">
+                                    El nombre es obligatorio
+                                </div>
+                                <div *ngIf="nombreHab.errors?.minlength">
+                                    El nombre debe tener 3 caracteres como minimo.
+                                </div>
+                                <div *ngIf="nombreHab.errors?.maxlength">
+                                    El nombre no puede tener mas de 25 caracteres.
+                                </div>
+                            </mat-error>
+                        </mat-form-field>
+
+                        <div class="campos-numericos">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Huespedes</mat-label>
+                                <input matInput type="number" placeholder="Ej. 3" [formControl]="capacidad" max="8" min="1">
+                                <mat-hint align="start"><strong>Capacidad maxima</strong> </mat-hint>
+                                <mat-error *ngIf="capacidad.invalid && (capacidad.dirty || capacidad.touched)">
+                                    <div *ngIf="capacidad.errors?.required">
+                                        La capacidad es obligatoria
+                                    </div>
+                                    <div *ngIf="capacidad.errors?.minlength">
+                                        El alojamiento debe poder albergar 1 persona como minimo.
+                                    </div>
+                                    <div *ngIf="capacidad.errors?.maxlength">
+                                        El alojamiento no puede albergar mas de 8 personas.
+                                    </div>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field appearance="outline" class="numerico">
+                                <mat-label>Precio</mat-label>
+                                <input matInput type="number" class="right-align" formControlName="precio">
+                                <span matPrefix>€&nbsp;</span>
+                                <span matSuffix>.00</span>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="filtros">
+                        <mat-form-field class="chip-list">
+                            <mat-chip-list #listaCarac aria-label="Selector de caracteristicas">
+                                <mat-chip *ngFor="let caracteristica of caracteristicas" (removed)="removeCaracteristica(caracteristica)">
+                                    {{caracteristica.caracteristica}}
+                                    <mat-icon matChipRemove>cancel</mat-icon>
+                                </mat-chip>
+                                <input placeholder="Nueva caracteritica..." [matChipInputFor]="listaCarac" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addCaracteristica($event)">
+                            </mat-chip-list>
+                        </mat-form-field>
+                    </div>
+                    <div class="fotos">
+                        <button mat-button class="btn btn-outline-warning boton-subida" (click)="subirFotoHabitacion()">
+                            Seleccionar fotos &nbsp;<fa-icon [icon]="faUpload"></fa-icon>
+                        </button>
+                        <br>
+                        <div *ngIf="mostrarFotosHabitacion" class="imagenesAlojamiento">
+                            <div *ngFor="let foto of fotosHabitacion" class="imagen">
+                                <img [src]="foto.url" [alt]="foto.imagenId" width="125px" height="75px">
+                                <mat-icon class="icono-cerrar" (click)="borrarFotoHabitacion(foto)">highlight_off</mat-icon>
+                            </div>
+                        </div>
+                        <input type="file" id="fileUploadH" name="fileUploadH" multiple accept="image/*" style="display: none;" />
+                    </div>
+                </div>
+                <div class="botones-segundo boton">
+                    <button mat-button matStepperPrevious class="btn btn-warning">Atras</button>
+                    <button type="reset" (click)="anadirHabitacion()" class="btn btn-primary">Crear habitación</button>
+                    <button mat-button matStepperNext class="btn btn-success">Siguiente</button>
+                </div>
+
+                <div class="habitaciones" *ngIf="mostrarHabitaciones">
+                    <h1>Habitaciones creadas</h1>
+                    <app-habitacion-tarjeta [habitacion]="habitacion" [alojamiento]="alojamiento" *ngFor="let habitacion of habitaciones" (borrar)="borrarHabitacion($event)"></app-habitacion-tarjeta>
+                </div>
+            </form>
+
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Listo!</ng-template>
+            <h1 class="titulo-final">Resumen</h1>
+            <h2>Alojamiento</h2>
+            <div class="alojamiento-resumen" *ngIf="alojamiento != undefined">
+                <app-alojamiento-tarjeta [Alojamiento]="alojamiento"></app-alojamiento-tarjeta>
+            </div>
+            <h2>Habitaciones</h2>
+            <div class="habitaciones">
+                <app-habitacion-tarjeta [habitacion]="habitacion" [alojamiento]="alojamiento" *ngFor="let habitacion of habitaciones" (borrar)="borrarHabitacion($event)"></app-habitacion-tarjeta>
+            </div>
+            <div class="botones-tercero boton">
+                <button mat-button matStepperPrevious class="btn btn-warning">Atras</button>
+                <button mat-button class="btn btn-success" (click)="guardarAlojamiento()">Crear/guardar</button>
+            </div>
+        </mat-step>
+    </mat-vertical-stepper>
+</div>

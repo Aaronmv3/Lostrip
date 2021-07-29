@@ -1,0 +1,134 @@
+.menuPerfil {
+    min-height: 100vh;
+    margin-left: 15%;
+    margin-top: 1%;
+}
+
+
+/* Cabecera datos */
+
+.cabecera-datos {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: grey 1px solid;
+    margin-right: 20%;
+}
+
+.titulos {
+    margin-left: 2%;
+}
+
+.titulo {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.subtitulo {
+    font-size: 15px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: grey;
+}
+
+.imagen {
+    border-radius: 150px;
+    margin-right: 2%;
+}
+
+.imagen img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.imagen fa-icon {
+    color: black;
+    position: relative;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    top: -2.5vh;
+}
+
+
+/* Datos */
+
+.datos {
+    display: grid;
+    grid-template-areas: "descripcion usuario boton";
+    grid-template-columns: 25% 60% 15%;
+    margin: 2% 20% 0 0;
+    padding-bottom: 1%;
+    border-bottom: grey 1px solid;
+}
+
+.datos button {
+    grid-area: boton;
+    position: relative;
+    top: -1vh;
+    margin-right: 3.5%;
+    font-size: 1vw;
+}
+
+.descripcion {
+    grid-area: descripcion;
+    font-size: 15px;
+    margin-left: 2%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.usuario {
+    grid-area: usuario;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: black;
+}
+
+.usuario span {
+    font-size: 12px;
+    border-radius: 2px;
+    color: white;
+    padding: 4px;
+}
+
+
+/* formulario */
+
+.formulario {
+    margin-right: 15%;
+}
+
+.editar button {
+    max-height: 4vh;
+}
+
+.calendar {
+    top: 0vh !important;
+}
+
+
+/* Alojamientos */
+
+.alojamientos {
+    margin-right: 20%;
+    text-align: center;
+    padding-bottom: -5%;
+}
+
+.alojamientos h1 {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.titulos-alojamiento {
+    margin-top: 1%;
+    border-bottom: black 1px solid;
+}
+
+.boton-anadir {
+    margin-top: 1%;
+    padding: 2% 15%;
+}

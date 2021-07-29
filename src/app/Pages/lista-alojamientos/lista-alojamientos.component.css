@@ -1,0 +1,238 @@
+.muestraAlojamientos {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    grid-template-rows: auto;
+    grid-template-areas: "formularios main";
+    background-color: white;
+    min-height: 100vh;
+}
+
+.formularios {
+    grid-area: formularios;
+}
+
+.formularioBusqueda {
+    margin-top: 12%;
+    margin-bottom: 10%;
+    margin-left: 2%;
+    top: 8vh;
+    border: grey 2px solid;
+    border-radius: 10px;
+}
+
+.tarjeta {
+    grid-area: main;
+    width: 80%;
+    margin: 10px 3%;
+}
+
+.informacionBusqueda h1 {
+    font-size: 30px;
+    font-weight: bold;
+    position: relative;
+    left: 3%;
+    width: 80%;
+    margin-bottom: 7px !important;
+}
+
+.informacionBusqueda h1::first-letter {
+    text-transform: uppercase;
+}
+
+.filtrosBusqueda {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    z-index: 1;
+    margin-bottom: 2%;
+}
+
+.form-mat-sort {
+    border-radius: 5px;
+    width: 33%;
+    margin-right: 2%;
+    background-color: rgb(49, 49, 49);
+}
+
+.selectorOrden {
+    border-radius: 5px;
+    color: white;
+    width: 10vw;
+}
+
+.texto-mat {
+    color: white;
+}
+
+
+/* spinner */
+
+.spinner {
+    background-color: white;
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.spinner img {
+    max-width: 50%;
+}
+
+
+/* Media querys */
+
+@media(max-width: 1680px) {
+    .muestraAlojamientos {
+        grid-template-rows: 32% 20%;
+    }
+    .formularioBusqueda {
+        top: 21%;
+    }
+    .filtrosBusqueda {
+        top: 68vh;
+        margin-top: 0;
+    }
+}
+
+@media(max-width: 1300px) {
+    .muestraAlojamientos {
+        grid-template-rows: 32% 20%;
+    }
+    .form-mat-sort {
+        top: 20vh;
+    }
+    .selectorOrden {
+        width: 18vw;
+    }
+}
+
+@media(max-width: 1210px) {
+    .muestraAlojamientos {
+        grid-template-rows: 33% 20%;
+    }
+}
+
+@media(max-width: 1024px) {
+    .form-mat-sort {
+        top: 16vh;
+    }
+    .formularioBusqueda {
+        top: 21vh;
+    }
+    .filtrosBusqueda {
+        top: 67vh;
+    }
+    .muestraAlojamientos {
+        grid-template-rows: 34% 20%;
+    }
+}
+
+@media(max-width: 990px) {
+    .muestraAlojamientos {
+        display: block;
+        padding: 10px;
+    }
+    .formularioBusqueda {
+        display: block;
+        width: 90%;
+        background-color: rgb(228, 228, 228);
+        top: 2vh;
+        border-radius: 15px;
+        margin: 3%;
+        position: relative;
+        min-height: 300px;
+    }
+    .filtrosBusqueda {
+        position: relative;
+        display: flex;
+        right: 0;
+        left: 3%;
+        top: 1vh;
+        margin-bottom: 8vh;
+        width: 80%;
+    }
+    .informacionBusqueda h1 {
+        font-size: 30px;
+        font-weight: bold;
+        position: relative;
+        left: 10%;
+        width: 80%;
+    }
+    .form-mat-sort {
+        top: 2.7vh;
+        float: inherit;
+        width: 20vw;
+    }
+    .selectorOrden {
+        width: 20vw;
+    }
+    .card-group {
+        justify-content: center !important;
+    }
+}
+
+@media(max-width: 600px) {
+    .form-mat-sort {
+        width: 25vw;
+        left: 55vw;
+    }
+    .selectorOrden {
+        width: 25vw;
+    }
+}
+
+@media(max-width: 575px) {
+    .filtrosBusqueda {
+        display: flex;
+        flex-direction: column;
+        left: 0;
+    }
+    .form-mat-sort {
+        width: 90vw;
+        left: 0;
+    }
+    .selectorOrden {
+        width: 90vw;
+    }
+    .filtros-app {
+        position: relative;
+        top: 4vh;
+        right: 0;
+    }
+    .informacionBusqueda h1 {
+        left: 1%;
+    }
+    .formularioBusqueda {
+        max-height: 700px;
+    }
+}
+
+@media(max-width: 420px) {
+    .filtrosBusqueda {
+        margin-top: 10%;
+    }
+}
+
+@media(max-height: 1024px) {
+    .form-mat-sort {
+        height: 5vh;
+    }
+}
+
+@media(max-height: 880px) {
+    .form-mat-sort {
+        height: 6vh;
+    }
+}
+
+@media(max-height: 730px) {
+    .form-mat-sort {
+        height: 7vh;
+    }
+}
+
+@media(max-height: 630px) {
+    .form-mat-sort {
+        height: 8vh;
+    }
+}

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "lostrip"
+  },
+  "targets": {
+    "lostrip": {
+      "hosting": {
+        "Lostrip": [
+          "lostrip"
+        ]
+      }
+    }
+  }
+}

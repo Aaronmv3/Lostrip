@@ -1,0 +1,53 @@
+<nav class="navbar  navbarColor justify-content-between">
+    <a class="navbar-brand" href="#">
+        <img src="/assets/Iconos/icono-cabecera.ico" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy"> Lostrip
+    </a>
+
+    <div class="btn-group btn-centro">
+        <button type="button" class="btn btn-outline-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Contacto
+    </button>
+        <div class="dropdown-menu dropdown-menu-center">
+            <div class="card">
+                <img src="/assets/Imagenes/avatar.jpg" alt="John" style="width:100%">
+                <h1>Aaron Martinez</h1>
+                <p class="title">Programador</p>
+                <p>CIFP Carballeira</p>
+                <div class="iconos">
+                    <a class="icono-tarjeta" href="#">
+                        <fa-icon class="icono-fa" [icon]="faFacebookF"></fa-icon>
+                    </a>
+                    <a class="icono-tarjeta" href="#">
+                        <fa-icon class="icono-fa" [icon]="faTwitter"></fa-icon>
+                    </a>
+                    <a class="icono-tarjeta" href="#">
+                        <fa-icon class="icono-fa" [icon]="faGooglePlus"></fa-icon>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <ul class="nav navbar-nav flex-row justify-content-between ml-auto">
+        <li class="nav-item order-2 order-md-1"><a href="#" class="nav-link" title="settings"><i class="fa fa-cog fa-fw fa-lg"></i></a></li>
+        <button *ngIf="this.autenticado == false" type="button" [routerLink]="['/login']" class="btn btn-outline-danger">Iniciar Sesion</button>
+
+        <div *ngIf="this.autenticado == true" class="btn-group ">
+            <button type="button" class="btn btn-outline-info" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img [src]="usuario.fotoPerfil" alt="fotoUsuario">
+                {{usuario.nombre}}
+        </button>
+            <div class="dropdown-menu  dropdown-menu-right">
+                <a class="dropdown-item" [routerLink]="['perfil']">Perfil</a>
+                <a class="dropdown-item" href="#">Reservas</a>
+                <a class="dropdown-item" href="#">Comentarios</a>
+                <div class="dropdown-divider"></div>
+                <div class="card">
+                    <button (click)="logout()" type="button" class="btn btn-danger">Desconectar</button>
+                </div>
+            </div>
+        </div>
+
+    </ul>
+</nav>
