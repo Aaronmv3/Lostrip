@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Alojamiento } from 'src/models/alojamientos.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable()
 
 export class AlojamientosService {
   
   private alojamientos: Alojamiento[] = [];
-  private alojURL: string;
+  private alojURL = environment.alojURL;
   private alojamiento: Alojamiento;
 
   constructor(private http: HttpClient) { 
-    this.alojURL = 'http://localhost:8080/alojamiento';
   }
 
   getAlojamientos(){

@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FotosService {
 
-  private fotosURL: string;
+  private fotosURL = environment.fotosURL;
   constructor(private http: HttpClient) { 
-    this.fotosURL = 'http://localhost:8080/cloudinary';
+
   }
 
   subir(imagen: File){

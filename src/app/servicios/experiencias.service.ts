@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Experiencias } from 'src/models/experiencias.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +9,10 @@ import { HttpClient } from '@angular/common/http';
 export class ExperienciasService {
   
   private  experiencias: Experiencias[] = [];
-  private expURL: string;
+  private expURL = environment.expURL;
   private experiencia: Experiencias;
 
   constructor(private http: HttpClient) {
-    this.expURL = 'http://localhost:8080/experiencia'
    }
 
   getExperiencias(){

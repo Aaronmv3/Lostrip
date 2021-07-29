@@ -1,14 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CorreoService {
 
-  private mailURL: string;
+  private mailURL = environment.mailURL;
   constructor(private http: HttpClient) { 
-    this.mailURL = 'http://localhost:8080/correo';
   }
 
   enviar(para: string, alojamientoNombre: string, usuarioNombre){

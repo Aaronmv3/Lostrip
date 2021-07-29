@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 import { UsuarioModel } from 'src/models/usuario.model';
 
 @Injectable({
@@ -8,12 +9,11 @@ import { UsuarioModel } from 'src/models/usuario.model';
 })
 export class UsuariosService {
 
-  private userURL: string;
+  private userURL = environment.userURL;
   private usuarios: UsuarioModel [] = [];
   private usuario: UsuarioModel;
 
   constructor(private http: HttpClient) { 
-    this.userURL = 'http://localhost:8080/usuario';
   }
 
   getUsuarios(){
