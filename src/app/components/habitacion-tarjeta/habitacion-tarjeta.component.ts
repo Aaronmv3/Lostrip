@@ -45,19 +45,30 @@ export class HabitacionTarjetaComponent implements OnInit {
   }
 
   solicitar(){
-    Swal.showLoading();
-    this.userService.anadirReserva(this.alojamiento.id.toString(), this.usuario[0].userID).subscribe(()=>{
-      this.correo.enviar(this.usuario[0].email,this.alojamiento.nombre, this.usuario[0].nombre).subscribe(()=>{
-        Swal.close();
-        Swal.fire({
-          position: 'top-end',
-          icon: 'success',
-          title: 'Se ha solicitado la reserva correctamente',
-          showConfirmButton: false,
-          timer: 1500
-        })
-      });
-    })
+    if(sessionStorage.getItem("Logged")){
+      Swal.showLoading();
+      this.userService.anadirReserva(this.alojamiento.id.toString(), this.usuario[0].userID).subscribe(()=>{
+        this.correo.enviar(this.usuario[0].email,this.alojamiento.nombre, this.usuario[0].nombre).subscribe(()=>{
+          Swal.close();
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Se ha solicitado la reserva correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        });
+      })
+    }else{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Error al solicitar reserva',
+        text:"Inicie sesion con su cuenta o cree una para la reserva",
+        showConfirmButton: false,
+        timer: 2500
+      })
+    }
   }
   borrarHabitacion(habitacion : Habitacion){
       this.evento.emit(habitacion);

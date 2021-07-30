@@ -16,7 +16,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let usuario of usuarios; let i = index">
+                <tr *ngFor="let usuario of usuarios | slice: (paginaUser-1) * pageSize : paginaUser * pageSize; let i = index ">
                     <th>{{usuario.nombre}} {{usuario.apellidos}}</th>
                     <td>{{usuario.email}}</td>
                     <td *ngIf="!actualizarRol || (usuario.userID == usuarioActual.userID) == true">{{usuario.usuarioRol}}</td>
@@ -39,6 +39,14 @@
                     </td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td>
+                        <ngb-pagination [(page)]="paginaUser" [pageSize]="pageSize" [collectionSize]="usuarios.length" class="d-flex justify-content-center"></ngb-pagination>
+                    </td>
+                </tr>
+            </tfoot>
+
         </table>
     </div>
 </div>

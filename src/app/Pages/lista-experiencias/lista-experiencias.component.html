@@ -8,9 +8,9 @@
         </div>
         <div class="filtrosBusqueda">
             <form [formGroup]="shortByForm" class="form-mat-sort">
-                <mat-form-field appearance="fill" class="selectorOrden">
-                    <mat-label class="texto-mat">Ordenar por:</mat-label>
-                    <mat-select class="texto-mat" formControlName="shortBy" disableRipple>
+                <mat-form-field appearance="outline" class="selectorOrden">
+                    <mat-label>Ordenar por:</mat-label>
+                    <mat-select formControlName="shortBy" disableRipple>
                         <mat-option class="option-mat" *ngFor="let orden of ordenado" [value]="orden" (click)="ordenarAlojamientos()">
                             {{orden}}
                         </mat-option>
@@ -23,7 +23,8 @@
     <div class="informacionBusqueda">
         <h1>{{busqueda.busqueda}}: {{experiencias.length}} experiencias</h1>
         <div class="card-group">
-            <app-alojamiento-tarjeta class="tarjeta" [Alojamiento]="experiencia" [habitaciones]="this.busqueda.numHabitaciones" *ngFor="let experiencia of experiencias | sortBy: ordenacion: valor"></app-alojamiento-tarjeta>
+            <app-alojamiento-tarjeta class="tarjeta" [Alojamiento]="experiencia" [habitaciones]="this.busqueda.numHabitaciones" *ngFor="let experiencia of experiencias | sortBy: ordenacion: valor | slice: (page-1) * pageSize : page * pageSize"></app-alojamiento-tarjeta>
         </div>
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="experiencias.length" class="d-flex justify-content-center"></ngb-pagination>
     </div>
 </div>

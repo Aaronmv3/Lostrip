@@ -42,26 +42,15 @@
 .filtrosBusqueda {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-around;
     margin-bottom: 2%;
     z-index: 1;
-}
-
-.form-mat-sort {
-    border-radius: 5px;
-    width: 33%;
-    margin-right: 2%;
-    background-color: rgb(49, 49, 49);
 }
 
 .selectorOrden {
     border-radius: 5px;
     color: white;
     width: 10vw;
-}
-
-.texto-mat {
-    color: white;
 }
 
 .spinner {

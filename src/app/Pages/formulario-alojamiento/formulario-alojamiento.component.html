@@ -89,8 +89,14 @@
                                     {{filtro.filtros}}
                                     <mat-icon matChipRemove>cancel</mat-icon>
                                 </mat-chip>
-                                <input placeholder="Nuevo filtro..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addFiltro($event)">
+                                <input placeholder="Nuevo filtro..." #filtrosInput [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true">
                             </mat-chip-list>
+                            <mat-hint align="start"><strong>Seleccione solo las mostradas</strong> </mat-hint>
+                            <mat-autocomplete [isOpen]="true" #auto="matAutocomplete" (optionSelected)="filtrado($event)">
+                                <mat-option *ngFor="let filtro of filtrosValidosAlojamiento" [value]="filtro">
+                                    {{filtro}}
+                                </mat-option>
+                            </mat-autocomplete>
                         </mat-form-field>
                     </div>
                     <div class="fotos">
@@ -112,7 +118,7 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step [stepControl]="HabitacionFormulario" label="Creacion de habitaciones">
+        <mat-step [stepControl]="HabitacionFormulario" label="Creacion de habitaciones" [optional]="true">
             <form [formGroup]="HabitacionFormulario">
                 <div class="grid-formulario">
                     <div class="datos">
@@ -329,7 +335,7 @@
                 </div>
             </form>
         </mat-step>
-        <mat-step [stepControl]="HabitacionFormulario" label="Creacion de habitaciones">
+        <mat-step [stepControl]="HabitacionFormulario" label="Creacion de habitaciones" [optional]="true">
             <form [formGroup]="HabitacionFormulario">
                 <div class="grid-formulario">
                     <div class="datos">

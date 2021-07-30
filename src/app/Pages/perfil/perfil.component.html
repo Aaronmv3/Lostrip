@@ -280,7 +280,8 @@
                                 </div>
                             </div>
                         </div>
-                        <app-alojamiento-tarjeta [Alojamiento]="alojamiento" [propietario]="usuario" *ngFor="let alojamiento of alojamientos"></app-alojamiento-tarjeta>
+                        <app-alojamiento-tarjeta [Alojamiento]="alojamiento" [propietario]="usuario" *ngFor="let alojamiento of alojamientos | slice: (paginaExp-1) * pageSize : paginaExp * pageSize"></app-alojamiento-tarjeta>
+                        <ngb-pagination [(page)]="paginaAloj" [pageSize]="pageSize" [collectionSize]="alojamientos.length" class="d-flex justify-content-center"></ngb-pagination>
                         <button class="btn btn-outline-primary boton-anadir" (click)="abrirFormulario('alojamiento')"><fa-icon [icon]="faPlus"></fa-icon></button>
                     </div>
                 </div>
@@ -305,7 +306,8 @@
                                 </div>
                             </div>
                         </div>
-                        <app-alojamiento-tarjeta [Alojamiento]="experiencia" [propietario]="usuario" *ngFor="let experiencia of experiencias"></app-alojamiento-tarjeta>
+                        <app-alojamiento-tarjeta [Alojamiento]="experiencia" [propietario]="usuario" *ngFor="let experiencia of experiencias | slice: (paginaExp-1) * pageSize : paginaExp * pageSize "></app-alojamiento-tarjeta>
+                        <ngb-pagination [(page)]="paginaExp" [pageSize]="pageSize" [collectionSize]="experiencias.length" class="d-flex justify-content-center"></ngb-pagination>
                         <button class="btn btn-outline-primary boton-anadir" (click)="abrirFormulario('experiencia')"><fa-icon [icon]="faPlus"></fa-icon></button>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { FotosService } from 'src/app/servicios/fotos.service';
@@ -25,6 +25,7 @@ export class FormularioExperienciaComponent implements OnInit {
     'Ourense','Palencia','Las Palmas','Pontevedra','La Rioja','Salamanca','Segovia','Sevilla','Soria','Tarragona',
     'Santa Cruz de Tenerife','Teruel','Toledo','Valencia','Valladolid','Vizcaya','Zamora','Zaragoza'];
     fotosExperiencia: Foto[] = [];
+
     //Datos de back
     obtenerExp: Experiencias[];
     experiencia: Experiencias;
@@ -37,6 +38,9 @@ export class FormularioExperienciaComponent implements OnInit {
     //Chips
     readonly separatorKeysCodes: number[] = [ENTER, COMMA];
     filtros : Filtro[] = [];
+    filtrosValidosExperiencia: string[] = ['Jardin', 'Naturaleza', 'Playa', 'Tematico', 'Bosque', 'Atracciones'];
+    @ViewChild('filtrosInput') filtrosInput: ElementRef<HTMLInputElement>;
+
     constructor(private _expServ: ExperienciasService, private cloud: FotosService, private router: Router, private routerAct : ActivatedRoute) { }
 
     ngOnInit(): void {
@@ -45,9 +49,7 @@ export class FormularioExperienciaComponent implements OnInit {
         setTimeout(() => {
           if (this.obtenerExp != undefined) {
             this.experiencia = this.obtenerExp[0];
-            
-            
-            
+                       
             this.experienciaFormulario = new FormGroup({
               nombreExp: new FormControl(this.experiencia.nombre, [Validators.required, Validators.maxLength(25), Validators.minLength(5)]),
               descripcionExp: new FormControl(this.experiencia.descripcion, [Validators.required, Validators.maxLength(200), Validators.minLength(20)]),
@@ -83,23 +85,12 @@ export class FormularioExperienciaComponent implements OnInit {
           }
         });
       }
-      }, 500);
-         
+      }, 500);   
     }
 
-    addFiltro(event: MatChipInputEvent): void {
-      const input = event.input;
-      const value = event.value;
-  
-      // Add our fruit
-      if ((value || '').trim()) {
-        this.filtros.push({filtros: value.trim()});
-      }
-  
-      // Reset the input value
-      if (input) {
-        input.value = '';
-      }
+    filtrado(e: MatAutocompleteSelectedEvent){
+      this.filtros.push({filtros:e.option.viewValue});
+      this.filtrosInput.nativeElement.value = '';
     }
 
     removeFiltro(filtro: Filtro): void {

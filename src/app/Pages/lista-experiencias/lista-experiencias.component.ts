@@ -28,6 +28,9 @@ export class ListaExperienciasComponent implements OnInit {
   valor: string = "asc";
   load: boolean = true;
 
+  //Paginacion
+  page = 1;
+  pageSize = 2;
   
  constructor( private _experienciaService: ExperienciasService,
     private router: Router, private _busquedaService: BusquedaService, private fb: FormBuilder) {

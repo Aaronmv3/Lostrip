@@ -5,6 +5,7 @@ import {  AlojamientosService } from 'src/app/servicios/alojamientos.service';
 import { Alojamiento } from 'src/models/alojamientos.model';
 import { busqueda } from 'src/models/busqueda.model';
 import { BusquedaService } from '../../servicios/busqueda.service';
+import { Filtro } from '../../../models/alojamientos.model';
 
 @Component({
   selector: 'app-lista-alojamientos',
@@ -16,17 +17,19 @@ export class ListaAlojamientosComponent implements OnInit {
   load: boolean = true;
   //Filtros
   alojamientos: Alojamiento[] = [];
+  alojamientosBusqueda: Alojamiento[] = [];
   busqueda: busqueda;
-  guardarBusquedaAloj: Alojamiento[] = [];
-  guardarPrimBusqueda: Alojamiento[];
-  primBusqueda: boolean = false;
-  filtrado2: boolean = false;
+  
 
   //Ordenado
   public shortByForm: FormGroup;
-  ordenado: string[] = ['Precio Asc', 'Precio Desc', 'Nombre Asc', 'Nombre Desc'];
+  ordenado: string[] = ['Nombre Asc', 'Nombre Desc'];
   ordenacion: string = "nombre";
   valor: string = "asc";
+
+  //Paginacion
+  page = 1;
+  pageSize = 2;
   
  constructor( private _alojamientosService: AlojamientosService,
     private router: Router, private _busquedaService: BusquedaService, private fb: FormBuilder) {
@@ -48,15 +51,14 @@ export class ListaAlojamientosComponent implements OnInit {
     
     if(this._busquedaService.pasarBusqueda == undefined){
       this.alojamientos = this._alojamientosService.buscarAlojamiento(this.busqueda.busqueda);
-      this.guardarBusquedaAloj = this.alojamientos;
     }else{
       this.busqueda = this._busquedaService.pasarBusqueda;
       this.alojamientos = this._alojamientosService.buscarAlojamiento(this.busqueda.busqueda);
-      this.guardarBusquedaAloj = this.alojamientos;
     }
 
     setTimeout(() => {
       this.load = false;
+      this.alojamientosBusqueda = this.alojamientos;
     }, 2000);
     
   }
@@ -67,8 +69,26 @@ export class ListaAlojamientosComponent implements OnInit {
   }
 
   obtenerBusqueda(objeto){
-    this.busqueda = objeto;
+    if(objeto != undefined){
+      this.busqueda = objeto;
+    }
     this.alojamientos = this._alojamientosService.buscarAlojamiento(this.busqueda.busqueda);
-    this.guardarBusquedaAloj = this.alojamientos;
+    this.alojamientosBusqueda = this.alojamientos;
+  }
+
+  filtrar(filtros: string[]){
+    var alojamientosFiltrados: Alojamiento[] = [];
+    if(filtros.length == 0){
+      this.alojamientos = this.alojamientosBusqueda;
+    }else{
+        alojamientosFiltrados = this.alojamientosBusqueda;
+
+          for(let i in filtros){
+            alojamientosFiltrados = alojamientosFiltrados.filter(alojamiento =>{  
+                return alojamiento.filtros.find(filtro => filtro.filtros == filtros[i]);
+              });
+          }
+          this.alojamientos = alojamientosFiltrados; 
+    }
   }
 }

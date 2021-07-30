@@ -14,7 +14,7 @@ export class FiltrosBusquedaComponent implements OnInit {
   public filterForm: FormGroup;
 
   filtroPanelOpenState = false
-  filtros: string[] = ['Playa', 'Montaña', 'Ciudad', 'Piscina'];
+  filtros: string[] = ['Playa', 'Montaña', 'Ciudad', 'Piscina', 'Centro', 'Wifi', 'Admite mascotas', 'Fumadores'];
   filtros2: string[] = ['Jardin', 'Naturaleza', 'Playa', 'Tematico', 'Bosque', 'Atracciones'];
   ruta: string;
 

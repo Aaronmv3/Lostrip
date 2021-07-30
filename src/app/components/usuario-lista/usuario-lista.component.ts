@@ -25,6 +25,11 @@ export class UsuarioListaComponent implements OnInit {
   faTrashAlt = faTrashAlt;
   faTimes = faTimes;
   faSave = faSave;
+
+  //Paginacion
+  paginaUser = 1;
+  pageSize = 5;
+
   constructor(private _userService: UsuariosService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -52,11 +57,7 @@ export class UsuarioListaComponent implements OnInit {
       this.auth.borrarUsuario().then(()=>{
         Swal.close();
         window.location.reload();
-      });
-      setTimeout(() => {
-        this.router.navigateByUrl('/home');
-      }, 150);
-      
+      });  
     }
   });
   }

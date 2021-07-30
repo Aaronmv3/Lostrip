@@ -67,6 +67,11 @@ export class PerfilComponent implements OnInit {
   faSave = faSave;
   faPlus = faPlusCircle;
 
+  //Paginacion
+  paginaExp = 1;
+  paginaAloj = 1;
+  pageSize = 5;
+
   constructor(private _userService: UsuariosService, private auth:AuthService, private router: Router, private alojServ: AlojamientosService,
     private _expServ: ExperienciasService) { }
 

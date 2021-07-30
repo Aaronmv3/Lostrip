@@ -39,7 +39,9 @@ export class AlojamientoComponent implements OnInit {
     setTimeout(() => {
       setTimeout(() => {
         this.alojamiento = this.obtenerAloj[0];
-        this.obtenerUsuario = this.userService.getUsuario(sessionStorage.getItem("Logged"));
+        if(sessionStorage.getItem("Logged")){
+          this.obtenerUsuario = this.userService.getUsuario(sessionStorage.getItem("Logged"));
+        }
         this.load = false;
       }, 600);
       this.routerAct.params.subscribe(params => {

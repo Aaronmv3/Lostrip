@@ -97,8 +97,14 @@
                                     {{filtro.filtros}}
                                     <mat-icon matChipRemove>cancel</mat-icon>
                                 </mat-chip>
-                                <input placeholder="Nuevo filtro..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addFiltro($event)">
+                                <input placeholder="Nuevo filtro..." #filtrosInput [matAutocomplete]="auto" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true">
                             </mat-chip-list>
+                            <mat-hint align="start"><strong>Seleccione solo las mostradas</strong> </mat-hint>
+                            <mat-autocomplete [isOpen]="true" #auto="matAutocomplete" (optionSelected)="filtrado($event)">
+                                <mat-option *ngFor="let filtro of filtrosValidosExperiencia" [value]="filtro">
+                                    {{filtro}}
+                                </mat-option>
+                            </mat-autocomplete>
                         </mat-form-field>
                     </div>
                     <div class="fotos">

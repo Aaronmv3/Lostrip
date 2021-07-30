@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Alojamiento } from 'src/models/alojamientos.model';
 import Swal from 'sweetalert2';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
 
 @Component({
@@ -45,8 +46,10 @@ export class FormularioAlojamientoComponent implements OnInit {
   //Chips
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   filtros : Filtro[] = [];
+  filtrosValidosAlojamiento: string[] = ['Playa', 'Montaña', 'Ciudad', 'Piscina', 'Centro', 'Wifi', 'Admite mascotas', 'Fumadores'];
   caracteristicas: Caracteristica[] = [];
-  
+
+   @ViewChild('filtrosInput') filtrosInput: ElementRef<HTMLInputElement>;
   constructor(private _alojServ: AlojamientosService, private cloud: FotosService, private router: Router, private routerAct : ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -96,20 +99,11 @@ export class FormularioAlojamientoComponent implements OnInit {
     
     
   }
-  addFiltro(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.filtros.push({filtros: value.trim()});
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
+  filtrado(e: MatAutocompleteSelectedEvent){
+    this.filtros.push({filtros:e.option.viewValue});
+    this.filtrosInput.nativeElement.value = '';
   }
+
 
   addCaracteristica(event: MatChipInputEvent): void {
     const input = event.input;
@@ -141,10 +135,12 @@ export class FormularioAlojamientoComponent implements OnInit {
   }
 
   guardarAlojamiento(){
-     this._alojServ.crearAlojamiento(this.alojamiento).subscribe((data)=>{
-       console.log(data);
-         this.router.navigateByUrl('/perfil');
-     });
+    console.log(this.alojamiento);
+    
+    //  this._alojServ.crearAlojamiento(this.alojamiento).subscribe((data)=>{
+    //    console.log(data);
+    //      this.router.navigateByUrl('/perfil');
+    //  });
 
   }
   crearAlojamiento(){
