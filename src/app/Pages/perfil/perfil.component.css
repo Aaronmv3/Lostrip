@@ -4,6 +4,10 @@
     margin-top: 1%;
 }
 
+.media {
+    display: none;
+}
+
 
 /* Cabecera datos */
 
@@ -131,4 +135,34 @@
 .boton-anadir {
     margin-top: 1%;
     padding: 2% 15%;
+}
+
+
+/* media querys */
+
+@media(max-width: 994px) {
+    .media {
+        display: block;
+    }
+    .inicio {
+        display: none;
+    }
+    .menuPerfil {
+        margin-left: 3%;
+    }
+    .cabecera-datos {
+        margin-right: 2%;
+    }
+    .datos {
+        margin: 2% 2% 0 0;
+    }
+    .alojamientos {
+        margin-right: 2%;
+    }
+    .alojamientos h1 {
+        font-size: 15px;
+    }
+    .datos button {
+        font-size: 2vw;
+    }
 }

@@ -1,4 +1,4 @@
-<div class="menuPerfil">
+<div class="menuPerfil inicio">
     <div class="row animated fadeInUp" *ngIf="cargado">
         <div class="col-3">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -312,6 +312,335 @@
                     </div>
                 </div>
                 <div *ngIf="admin == true" class="tab-pane fade" id="v-pills-usuarios" role="tabpanel" aria-labelledby="v-pills-usuarios-tab">
+                    <app-usuario-lista [usuarioActual]="usuario"></app-usuario-lista>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="menuPerfil media">
+    <div class=" animated fadeInUp" *ngIf="cargado">
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a *ngIf="normal == true || propietario == true || admin == true" class="nav-link active" id="pills-datos-tab" data-toggle="pill" href="#pills-datos" role="tab" aria-controls="pills-datos" aria-selected="true">Datos personales</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a *ngIf="normal == true || propietario == true || admin == true" class="nav-link" id="pills-seguridad-tab" data-toggle="pill" href="#pills-seguridad" role="tab" aria-controls="pills-seguridad" aria-selected="false">Seguridad</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a *ngIf="propietario == true || admin == true" class="nav-link" id="v-pills-alojamientos-tab" data-toggle="pill" href="#pills-alojamientos" role="tab" aria-controls="pills-alojamientos" aria-selected="false">Alojamientos</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a *ngIf="propietario == true || admin == true" class="nav-link" id="v-pills-experiencias-tab" data-toggle="pill" href="#pills-experiencias" role="tab" aria-controls="pills-experiencias" aria-selected="false">Experiencias</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a *ngIf="admin == true" class="nav-link" id="v-pills-usuarios-tab" data-toggle="pill" href="#pills-usuarios" role="tab" aria-controls="pills-usuarios" aria-selected="false">Usuarios</a>
+            </li>
+        </ul>
+        <div>
+            <div class="tab-content" id="pills-tabContent">
+                <div *ngIf="normal == true || propietario == true || admin == true" class="tab-pane fade show active datosPerfil" id="pills-datos" role="tabpanel" aria-labelledby="pills-datos-tab">
+                    <div class="cabecera-datos">
+                        <div class="titulos">
+                            <h1 class="titulo">Datos personales</h1>
+                            <h2 class="subtitulo">Actualiza y cambia tus datos</h2>
+                        </div>
+                        <div class="imagen">
+                            <img (click)="subirImagen()" [src]="usuario.fotoPerfil" alt="perfil">
+                            <fa-icon [icon]="faEdit"></fa-icon>
+                        </div>
+                    </div>
+                    <div class="datos" *ngIf="abrirNombre == false">
+                        <p class="descripcion">Nombre</p>
+                        <p class="usuario">{{usuario.nombre}} {{usuario.apellidos}}</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="abrirNombre = true">Editar</button>
+                    </div>
+                    <div class="datos editar animated fadeIn" *ngIf="abrirNombre == true">
+                        <p class="descripcion">Nombre</p>
+                        <form [formGroup]="formularioActualizar" (ngSubmit)="actualizarUser('nombre')" class="formulario">
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre
+                                    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="text-danger animated fadeIn">
+                                        <div *ngIf="nombre.errors?.required">
+                                            El nombre es obligatorio
+                                        </div>
+                                        <div *ngIf="nombre.errors?.minlength">
+                                            El nombre debe tener 3 caracteres como minimo.
+                                        </div>
+                                        <div *ngIf="nombre.errors?.maxlength">
+                                            El nombre no puede tener mas de 14 caracteres.
+                                        </div>
+                                    </div>
+                                </label>
+                                <input [class.is-invalid]="nombre.invalid && (nombre.dirty || nombre.touched)" type="text" class="form-control" id="nombre" formControlName="nombre">
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="apellidos" class="form-label">Apellidos
+                                    <div *ngIf="apellidos.invalid && (apellidos.dirty || apellidos.touched)" class="text-danger animated fadeIn">
+                                        <div *ngIf="apellidos.errors?.required">
+                                            Los apellidos son obligatorios
+                                        </div>
+                                        <div *ngIf="apellidos.errors?.minlength">
+                                            Los apellidos deben tener 7 caracteres como minimo.
+                                        </div>
+                                        <div *ngIf="apellidos.errors?.maxlength">
+                                            Los apellidos no pueden tener mas de 25 caracteres.
+                                        </div>
+                                    </div>
+                                </label>
+                                <input [class.is-invalid]="apellidos.invalid && (apellidos.dirty || apellidos.touched)" type="text" class="form-control" id="apellidos" formControlName="apellidos">
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="apellidos.invalid || nombre.invalid"><fa-icon [icon]="faSave"></fa-icon></button>
+                        </form>
+                        <button type="button" class="btn btn-outline-danger" (click)="abrirNombre = false"><fa-icon [icon]="faTimes"></fa-icon></button>
+                    </div>
+                    <div class="datos" *ngIf="abrirNick == false">
+                        <p class="descripcion">Apodo</p>
+                        <p *ngIf="usuario.nick != null" class="usuario">{{usuario.nick}}</p>
+                        <p *ngIf="usuario.nick == null" class="text-muted">Por favor introduzca un apodo</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="abrirNick = true">Editar</button>
+                    </div>
+
+                    <div class="datos editar animated fadeIn" *ngIf="abrirNick == true">
+                        <p class="descripcion">Apodo</p>
+                        <form [formGroup]="formularioActualizar" (ngSubmit)="actualizarUser('nick')" class="formulario">
+                            <div class="mb-3">
+                                <label for="nick" class="form-label">Apodo
+                                    <div *ngIf="nick.invalid && (nick.dirty || nick.touched)" class="text-danger animated fadeIn">
+                                        <div *ngIf="nick.errors?.required">
+                                            El apodo es obligatorio
+                                        </div>
+                                        <div *ngIf="nick.errors?.minlength">
+                                            El apodo debe tener 4 caracteres como minimo.
+                                        </div>
+                                        <div *ngIf="nick.errors?.maxlength">
+                                            El apodo no puede tener mas de 10 caracteres.
+                                        </div>
+                                    </div>
+                                </label>
+                                <input [class.is-invalid]="nick.invalid && (nick.dirty || nick.touched)" type="text" class="form-control" id="nick" formControlName="nick">
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="nick.invalid"><fa-icon [icon]="faSave"></fa-icon></button>
+                        </form>
+                        <button type="button" class="btn btn-outline-danger" (click)="abrirNick = false"><fa-icon [icon]="faTimes"></fa-icon></button>
+                    </div>
+
+                    <div class="datos">
+                        <p class="descripcion">Email</p>
+                        <p class="usuario">{{usuario.email}} <span [ngStyle]="userFire.emailVerified?{'background-color':'green'}:{'background-color':'red'}"><fa-icon [icon]="faCheck"></fa-icon></span></p>
+                    </div>
+
+                    <div class="datos" *ngIf="abrirTelefono == false">
+                        <p class="descripcion">Teléfono</p>
+                        <p *ngIf="usuario.telefono != 0" class="usuario">{{usuario.telefono}}</p>
+                        <p *ngIf="usuario.telefono == 0" class="text-muted">Por favor introduzca un numero de teléfono</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="abrirTelefono = true">Editar</button>
+                    </div>
+                    <div class="datos editar animated fadeIn" *ngIf="abrirTelefono == true">
+                        <p class="descripcion">Teléfono</p>
+                        <form [formGroup]="formularioActualizar" (ngSubmit)="actualizarUser('telefono')" class="formulario">
+                            <div class="mb-3">
+                                <label for="prefijosLista" class="form-label">Prefijo
+                                    <div *ngIf="prefijo.invalid && (prefijo.dirty || prefijo.touched)" class="text-danger animated fadeIn">
+                                        <div *ngIf="prefijo.errors?.required">
+                                            El prefijo es obligatorio
+                                        </div>
+                                    </div>
+                                </label>
+                                <input class="form-control" list="prefijos" id="prefijosLista" placeholder="Escribe para buscar..." formControlName="prefijo">
+                                <datalist id="prefijos">
+                                  <option value="+34">España</option>
+                                  <option value="+39">Italia</option>
+                                  <option value="+376">Andorra</option>
+                                  <option value="+33">Francia</option>
+                                  <option value="+44">Reino Unido</option>
+                                </datalist>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefono" class="form-label">Telefono
+                                    <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="text-danger animated fadeIn">
+                                        <div *ngIf="telefono.errors?.required">
+                                            El Teléfono es obligatorio
+                                        </div>
+                                        <div *ngIf="telefono.errors?.minlength">
+                                            El Teléfono debe tener 9 caracteres como minimo.
+                                        </div>
+                                        <div *ngIf="telefono.errors?.maxlength">
+                                            El Teléfono no puede tener mas de 9 caracteres.
+                                        </div>
+                                    </div>
+                                </label>
+                                <input [class.is-invalid]="telefono.invalid && (telefono.dirty || telefono.touched)" type="tel" pattern="[0-9]{9}" class="form-control" id="telefono" formControlName="telefono">
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="telefono.invalid"><fa-icon [icon]="faSave"></fa-icon></button>
+                        </form>
+                        <button type="button" class="btn btn-outline-danger" (click)="abrirTelefono = false"><fa-icon [icon]="faTimes"></fa-icon></button>
+                    </div>
+
+                    <div class="datos" *ngIf="abrirFecha == false">
+                        <p class="descripcion">Fecha de nacimiento</p>
+                        <p *ngIf="usuario.fechaNacimiento != null" class="usuario">{{usuario.fechaNacimiento}}</p>
+                        <p *ngIf="usuario.fechaNacimiento == null" class="text-muted">Por favor introduzca su fecha de nacimiento</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="abrirFecha = true">Editar</button>
+                    </div>
+                    <div class="datos editar animated fadeIn" *ngIf="abrirFecha == true">
+                        <p class="descripcion">Fecha de nacimiento</p>
+                        <form [formGroup]="formularioActualizar" (ngSubmit)="actualizarUser('fecha')" class="formulario">
+                            <div class="mb-3">
+                                <label for="fecha" class="form-label">Fecha de nacimiento
+                                    <div *ngIf="fecha.invalid && (fecha.dirty || fecha.touched)" class="text-danger animated fadeIn">
+                                        <div *ngIf="fecha.errors?.required">
+                                            La fecha es obligatoria
+                                        </div>
+                                    </div>
+                                </label>
+                                <div class="input-group">
+                                    <input class="form-control" id="fecha" placeholder="yyyy-mm-dd" name="dp" formControlName="fecha" ngbDatepicker #d="ngbDatepicker">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button">
+                                            <fa-icon [icon]="faCalendarAlt"></fa-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="fecha.invalid"><fa-icon [icon]="faSave"></fa-icon></button>
+                        </form>
+                        <button type="button" class="btn btn-outline-danger" (click)="abrirFecha = false"><fa-icon [icon]="faTimes"></fa-icon></button>
+                    </div>
+
+                    <div class="datos" *ngIf="abrirNacionalidad == false">
+                        <p class="descripcion">Nacionalidad</p>
+                        <p *ngIf="usuario.nacionalidad != null" class="usuario">{{usuario.nacionalidad}}</p>
+                        <p *ngIf="usuario.nacionalidad == null" class="text-muted">Por favor introduzca su nacionalidad</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="abrirNacionalidad = true">Editar</button>
+                    </div>
+                    <div class="datos editar animated fadeIn" *ngIf="abrirNacionalidad == true">
+                        <p class="descripcion">Nacionalidad</p>
+                        <form [formGroup]="formularioActualizar" (ngSubmit)="actualizarUser('nacionalidad')" class="formulario">
+                            <div class="mb-3">
+                                <label for="nacionalidadLista" class="form-label">Nacionalidad
+                                    <div *ngIf="nacionalidad.invalid && (nacionalidad.dirty || nacionalidad.touched)" class="text-danger animated fadeIn">
+                                        <div *ngIf="nacionalidad.errors?.required">
+                                            La nacionalidad es obligatoria
+                                        </div>
+                                    </div>
+                                </label>
+                                <input id="nacionalidadLista" type="text" class="form-control" formControlName="nacionalidad" [ngbTypeahead]="search" />
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="nacionalidad.invalid"><fa-icon [icon]="faSave"></fa-icon></button>
+                        </form>
+                        <button type="button" class="btn btn-outline-danger" (click)="abrirNacionalidad = false"><fa-icon [icon]="faTimes"></fa-icon></button>
+                    </div>
+
+                    <div class="datos" *ngIf="abrirGenero == false">
+                        <p class="descripcion">Genero</p>
+                        <p *ngIf="usuario.genero != null" class="usuario">{{usuario.genero}}</p>
+                        <p *ngIf="usuario.genero == null" class="text-muted">Por favor introduzca su genero</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="abrirGenero = true">Editar</button>
+                    </div>
+                    <div class="datos editar animated fadeIn" *ngIf="abrirGenero == true">
+                        <p class="descripcion">Genero</p>
+                        <form [formGroup]="formularioActualizar" (ngSubmit)="actualizarUser('genero')" class="formulario">
+                            <div class="mb-3">
+                                <div *ngIf="genero.invalid && (genero.dirty || genero.touched)" class="text-danger animated fadeIn">
+                                    <div *ngIf="genero.errors?.required">
+                                        La nacionalidad es obligatorio
+                                    </div>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" formControlName="genero" name="genero" id="inlineRadio1" value="MUJER">
+                                    <label class="form-check-label" for="inlineRadio1">Mujer</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" formControlName="genero" name="genero" id="inlineRadio2" value="HOMBRE">
+                                    <label class="form-check-label" for="inlineRadio2">Hombre</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" formControlName="genero" name="genero" id="inlineRadio3" value="HELICOPTERO_APACHE_DE_COMBATE">
+                                    <label class="form-check-label" for="inlineRadio3">Otro</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary" [disabled]="genero.invalid"><fa-icon [icon]="faSave"></fa-icon></button>
+                        </form>
+                        <button type="button" class="btn btn-outline-danger" (click)="abrirGenero = false"><fa-icon [icon]="faTimes"></fa-icon></button>
+                    </div>
+                </div>
+                <div *ngIf="normal == true || propietario == true || admin == true" class="tab-pane fade" id="pills-seguridad" role="tabpanel" aria-labelledby="pills-seguridad-tab">
+                    <div class="cabecera-datos">
+                        <div class="titulos">
+                            <h1 class="titulo">Seguridad</h1>
+                            <h2 class="subtitulo">Modifica la contraseña o elimine su cuenta</h2>
+                        </div>
+                    </div>
+                    <div class="datos">
+                        <p class="descripcion">Contraseña</p>
+                        <p class="text-muted">Restablezca su contraseña para mayor seguridad</p>
+                        <button type="button" class="btn btn-outline-primary" (click)="contrasenaRec()">Restablecer</button>
+                    </div>
+                    <div class="datos">
+                        <p class="descripcion">Borrar</p>
+                        <p class="text-muted">Elimine su cuenta para siempre</p>
+                        <button type="button" class="btn btn-outline-danger" (click)="borrarCuenta()">Eliminar</button>
+                    </div>
+                </div>
+                <div *ngIf="propietario == true || admin == true" class="tab-pane fade" id="pills-alojamientos" role="tabpanel" aria-labelledby="pills-alojamientos-tab">
+                    <div class="cabecera-datos">
+                        <div class="titulos">
+                            <h1 class="titulo">Alojamientos</h1>
+                            <h2 class="subtitulo">Listado de alojamientos y creación</h2>
+                        </div>
+                    </div>
+                    <div class="alojamientos animated fadeIn">
+                        <div class="container titulos-alojamiento">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="col">Foto</h1>
+                                </div>
+                                <div class="col">
+                                    <h1 class="col">Nombre</h1>
+                                </div>
+                                <div class="col">
+                                    <h1 class="col">Dueño</h1>
+                                </div>
+                                <div class="col">
+                                    <h1 class="col">Acciones</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <app-alojamiento-tarjeta [Alojamiento]="alojamiento" [propietario]="usuario" *ngFor="let alojamiento of alojamientos | slice: (paginaExp-1) * pageSize : paginaExp * pageSize"></app-alojamiento-tarjeta>
+                        <ngb-pagination [(page)]="paginaAloj" [pageSize]="pageSize" [collectionSize]="alojamientos.length" class="d-flex justify-content-center"></ngb-pagination>
+                        <button class="btn btn-outline-primary boton-anadir" (click)="abrirFormulario('alojamiento')"><fa-icon [icon]="faPlus"></fa-icon></button>
+                    </div>
+                </div>
+                <div *ngIf="propietario == true || admin == true" class="tab-pane fade" id="pills-experiencias" role="tabpanel" aria-labelledby="pills-experiencias-tab">
+                    <div class="cabecera-datos">
+                        <div class="titulos">
+                            <h1 class="titulo">Experiencias</h1>
+                            <h2 class="subtitulo">Listado de experiencias y creación</h2>
+                        </div>
+                    </div>
+                    <div class="alojamientos animated fadeIn">
+                        <div class="container titulos-alojamiento">
+                            <div class="row">
+                                <div class="col">
+                                    <h1 class="col">Foto</h1>
+                                </div>
+                                <div class="col">
+                                    <h1 class="col">Experiencia</h1>
+                                </div>
+                                <div class="col">
+                                    <h1 class="col">Acciones</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <app-alojamiento-tarjeta [Alojamiento]="experiencia" [propietario]="usuario" *ngFor="let experiencia of experiencias | slice: (paginaExp-1) * pageSize : paginaExp * pageSize "></app-alojamiento-tarjeta>
+                        <ngb-pagination [(page)]="paginaExp" [pageSize]="pageSize" [collectionSize]="experiencias.length" class="d-flex justify-content-center"></ngb-pagination>
+                        <button class="btn btn-outline-primary boton-anadir" (click)="abrirFormulario('experiencia')"><fa-icon [icon]="faPlus"></fa-icon></button>
+                    </div>
+                </div>
+                <div *ngIf="admin == true" class="tab-pane fade" id="pills-usuarios" role="tabpanel" aria-labelledby="pills-usuarios-tab">
                     <app-usuario-lista [usuarioActual]="usuario"></app-usuario-lista>
                 </div>
             </div>
