@@ -1,3 +1,5 @@
+/* Tarjeta general */
+
 img {
     width: 100%;
     border-radius: 5px;
@@ -55,6 +57,9 @@ body {
     width: 38vw;
 }
 
+
+/* Estrellas */
+
 .star {
     position: relative;
     display: inline-block;
@@ -76,6 +81,9 @@ body {
     overflow: hidden;
     color: rgb(218, 218, 0);
 }
+
+
+/* Puntuacion */
 
 .puntuacion {
     background-color: rgb(78, 78, 197);
@@ -121,6 +129,63 @@ body {
     font-size: 17px;
     line-height: 5 !important;
 }
+
+
+/* Reservas */
+
+.boton-cancelar {
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+}
+
+.boton-cancelar button {
+    padding: 1vh 10vw 1vh 10vw;
+}
+
+.example-margin {
+    margin: 8px;
+}
+
+
+/* Formulario comentario */
+
+.comentario {
+    margin-top: 2%;
+    border-top: solid black 1px;
+}
+
+.comentario h1 {
+    text-align: center;
+}
+
+.comentario form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.inputComentario {
+    width: 25vw;
+}
+
+.botones-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.slider h2 {
+    text-align: center;
+}
+
+.valoracion {
+    width: 30vw;
+}
+
+
+/* Media querys */
 
 @media(max-width: 1425px) {
     .alojamientos p {

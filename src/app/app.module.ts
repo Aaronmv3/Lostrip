@@ -26,6 +26,8 @@ import { ExperienciaComponent } from './Pages/experiencia/experiencia.component'
 import { AlojamientoComponent } from './Pages/alojamiento/alojamiento.component';
 import { HabitacionTarjetaComponent } from './components/habitacion-tarjeta/habitacion-tarjeta.component';
 import { PerfilComponent } from './Pages/perfil/perfil.component';
+import { ReservasComponent } from './Pages/reservas/reservas.component';
+import { ComentariosComponent } from './Pages/comentarios/comentarios.component';
 
 //Imports
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -57,6 +59,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FormularioExperienciaComponent } from './Pages/fomulario-experiencia/fomulario-experiencia.component';
 import {MatDatepickerModule, } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatSliderModule} from '@angular/material/slider';
 
 
 @NgModule({
@@ -83,6 +86,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     UsuarioListaComponent,
     FormularioAlojamientoComponent,
     FormularioExperienciaComponent,
+    ReservasComponent,
+    ComentariosComponent,
   ],
   imports: [
     BrowserModule,
@@ -112,7 +117,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     ImageUploadModule.forRoot(),
     MatSlideToggleModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSliderModule
   ],
   providers: [
     AlojamientosService

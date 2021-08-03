@@ -11,6 +11,8 @@ import { PerfilComponent } from './Pages/perfil/perfil.component';
 import { AuthGuard } from './guards/auth.guard';
 import { FormularioAlojamientoComponent } from './Pages/formulario-alojamiento/formulario-alojamiento.component';
 import { FormularioExperienciaComponent } from './Pages/fomulario-experiencia/fomulario-experiencia.component';
+import { ReservasComponent } from './Pages/reservas/reservas.component';
+import { ComentariosComponent } from './Pages/comentarios/comentarios.component';
 
 
 
@@ -25,6 +27,8 @@ const APP_ROUTES: Routes = [
     {path: 'perfil', component: PerfilComponent, canActivate: [AuthGuard]},
     {path: 'formulario-alojamiento', component: FormularioAlojamientoComponent,children:[{path: ':id', component: FormularioAlojamientoComponent}], canActivate: [AuthGuard]},
     {path: 'formulario-experiencia', component: FormularioExperienciaComponent,children:[{path: ':id', component: FormularioExperienciaComponent}], canActivate: [AuthGuard]},
+    {path: 'reservas', component: ReservasComponent, canActivate: [AuthGuard]},
+    {path: 'comentarios', component: ComentariosComponent, canActivate:[AuthGuard]},
     {path: '**', pathMatch: 'full', redirectTo: 'home'}
 ];
 

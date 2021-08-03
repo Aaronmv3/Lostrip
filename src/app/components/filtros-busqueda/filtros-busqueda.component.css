@@ -21,6 +21,9 @@
     text-overflow: ellipsis;
 }
 
+
+/* Media querys */
+
 @media(max-width: 1300px) {
     .no-filter-width {
         width: 18vw !important;

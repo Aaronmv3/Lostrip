@@ -128,12 +128,6 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Listo!</ng-template>
-            <h1 class="titulo-final">Resumen</h1>
-            <h2>Alojamiento</h2>
-            <div class="alojamiento-resumen" *ngIf="experiencia != undefined">
-
-                <app-alojamiento-tarjeta [Alojamiento]="experiencia"></app-alojamiento-tarjeta>
-            </div>
             <div class="botones-tercero boton">
                 <button mat-button matStepperPrevious class="btn btn-warning">Atras</button>
                 <button mat-button class="btn btn-success" (click)="guardarExperiencia()">Crear/guardar</button>
@@ -266,11 +260,6 @@
         </mat-step>
         <mat-step>
             <ng-template matStepLabel>Listo!</ng-template>
-            <h1 class="titulo-final">Resumen</h1>
-            <h2>Experiencia</h2>
-            <div class="alojamiento-resumen" *ngIf="experiencia != undefined">
-                <app-alojamiento-tarjeta [Alojamiento]="experiencia"></app-alojamiento-tarjeta>
-            </div>
             <div class="botones-tercero boton">
                 <button mat-button matStepperPrevious class="btn btn-warning">Atras</button>
                 <button mat-button class="btn btn-success" (click)="guardarExperiencia()">Crear/guardar</button>

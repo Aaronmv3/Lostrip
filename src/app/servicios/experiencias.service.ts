@@ -14,7 +14,7 @@ export class ExperienciasService {
   constructor(private http: HttpClient) {
     this.expURL = 'http://localhost:8080/experiencia'
    }
-
+//Devuelve un array con todas las experiencias
   getExperiencias(){
     this.experiencias = [];
     this.http.get(this.expURL).subscribe(data =>{    
@@ -41,7 +41,7 @@ export class ExperienciasService {
     return this.experiencias;
 
   }
-  
+  //Devuelve un array con una experiencia en concreto
   getExperiencia(id: string){
     this.experiencias = [];
     this.http.get<Experiencias>(this.expURL + "/" + id).subscribe(data =>{    
@@ -63,7 +63,7 @@ export class ExperienciasService {
     });
     return this.experiencias;
   }
-
+//Obtiene el resultado de una busqueda
   buscarExperiencia( busqueda: string){
     if(busqueda == "Total"){
       return this.getExperiencias();
@@ -75,11 +75,11 @@ export class ExperienciasService {
         return busquedaExperiencia;
       }
     }
-
+//Crea una experiencia
     crearExperiencia(experiencia: Experiencias){
       return this.http.post<any>(this.expURL, experiencia);
     }
-
+//Borra una experiencia
     borrarExperiencia(experiencia: Experiencias){
       return this.http.post<any>(this.expURL + "/borrar", experiencia);
     }

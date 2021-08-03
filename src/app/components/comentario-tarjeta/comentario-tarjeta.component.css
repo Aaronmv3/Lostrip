@@ -1,3 +1,5 @@
+/* Lista de comentarios */
+
 .comentarios {
     border: 1px #3A6073 solid;
     border-radius: 15px 10px 10px 10px;
@@ -25,4 +27,22 @@
 
 .comentario {
     margin-left: 11%;
+}
+
+
+/* Pestaña comentarios */
+
+.pestana {
+    text-align: center;
+}
+
+.valoracion {
+    background-color: rgb(78, 78, 197);
+    color: white;
+    border-radius: 15px 10px 10px 10px;
+}
+
+.valoracion p {
+    color: white;
+    font-size: 18px;
 }

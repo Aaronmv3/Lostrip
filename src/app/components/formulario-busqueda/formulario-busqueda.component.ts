@@ -13,11 +13,12 @@ export class FormularioBusquedaComponent implements OnInit {
 
 
   @Output() resultForm = new EventEmitter<busqueda>();
-
+  //Variables
+  //Variables locales
   public searchForm: FormGroup;
   public buscar: busqueda;
   public fecha = new Date();
-
+  //Arrays
   provincias = ['Alava','Albacete','Alicante','Almería','Asturias','Avila','Badajoz','Barcelona','Burgos','Cáceres',
     'Cádiz','Cantabria','Castellón','Ciudad Real','Córdoba','A Coruña','Cuenca','Gerona','Granada','Guadalajara',
     'Guipúzcoa','Huelva','Huesca','Islas Baleares','Jaén','León','Lérida','Lugo','Madrid','Málaga','Murcia','Navarra',
@@ -39,6 +40,7 @@ export class FormularioBusquedaComponent implements OnInit {
     })
     
   }
+  //Envia el resultado de la busqueda a traves de los componentes para su utilizacion en otras paginas/componentes
   enviarBusqueda(){
     
      this.buscar = this.busqueda.crearBusqueda(this.searchForm.value.busqueda, this.searchForm.value.entrada, this.searchForm.value.salida, parseInt(this.searchForm.value.numHabitaciones),

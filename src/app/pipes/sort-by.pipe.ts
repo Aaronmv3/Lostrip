@@ -6,7 +6,7 @@ export type SortOrder = 'asc' | 'desc';
   name: 'sortBy'
 })
 export class SortByPipe implements PipeTransform {
-
+//Pipe para ordenar los datos de un array segun nombre o precio
   transform(value: any[], sortOrder: SortOrder | string = 'asc', sortKey?: string): any {
     sortOrder = sortOrder && (sortOrder.toLowerCase() as any);
 

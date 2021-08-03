@@ -52,7 +52,8 @@
         </div>
         <div class="comentarios">
             <h1>Comentarios</h1>
-            <app-comentario-tarjeta [comentarios]="comentarios" *ngFor="let comentarios of alojamiento.comentarios"></app-comentario-tarjeta>
+            <app-comentario-tarjeta [comentarios]="comentarios" *ngFor="let comentarios of alojamiento.comentarios | slice: (pagina-1) * pageSize : pagina * pageSize "></app-comentario-tarjeta>
+            <ngb-pagination [(page)]="pagina" [pageSize]="pageSize" [collectionSize]="alojamiento.comentarios.length" class="d-flex justify-content-center"></ngb-pagination>
         </div>
     </div>
 </div>

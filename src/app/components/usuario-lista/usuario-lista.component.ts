@@ -13,14 +13,16 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./usuario-lista.component.css']
 })
 export class UsuarioListaComponent implements OnInit {
-
-  usuarios: UsuarioModel[];
+//Variables
+  //Inputs
   @Input() usuarioActual: UsuarioModel;
-  cargado: boolean = false;
+  //Variables locales
+  usuarios: UsuarioModel[];
   formularioRol: FormGroup;
-
+  //Booleanos
+  cargado: boolean = false;
   actualizarRol: boolean = false;
-
+  //Iconos
   faEdit = faEdit;
   faTrashAlt = faTrashAlt;
   faTimes = faTimes;
@@ -33,7 +35,9 @@ export class UsuarioListaComponent implements OnInit {
   constructor(private _userService: UsuariosService, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.usuarios = this._userService.getUsuarios();
+    this._userService.getUsuarios().subscribe((data: UsuarioModel[]) =>{
+      this.usuarios = data;
+    });
     setTimeout(() => {
       this.cargado = true;
       this.formularioRol = new FormGroup({
@@ -42,7 +46,7 @@ export class UsuarioListaComponent implements OnInit {
     }, 500);
   }
 
-
+  //Borra la cuenta del usuario
   async borrarCuenta(){
     
     await Swal.fire({
@@ -61,6 +65,7 @@ export class UsuarioListaComponent implements OnInit {
     }
   });
   }
+  //Actualiza los roles de un usuario especificado por el admin
   actualizarRoles(i: number){
     var usuario = this.usuarios[i];
     usuario.usuarioRol = this.formularioRol.value.rol;  

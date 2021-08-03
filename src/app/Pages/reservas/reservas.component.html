@@ -1,0 +1,15 @@
+<div class="reservas">
+    <div class="cabecera-datos">
+        <div class="titulos">
+            <h1 class="titulo">Reservas</h1>
+            <h2 class="subtitulo">Listado de las reservas hechas</h2>
+        </div>
+    </div>
+    <div class="alojamientos" *ngIf="alojamientosUser.length > 0">
+        <app-alojamiento-tarjeta [Alojamiento]="alojamiento" [propietario]="obteneruser[0]" *ngFor="let alojamiento of alojamientosUser | slice: (page-1) * pageSize : page * pageSize"></app-alojamiento-tarjeta>
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="alojamientosUser.length" class="d-flex justify-content-center paginacion"></ngb-pagination>
+    </div>
+    <div class="alojamientos" *ngIf="alojamientosUser.length == 0">
+        <h2>No se ha hecho nignuna reserva.</h2>
+    </div>
+</div>

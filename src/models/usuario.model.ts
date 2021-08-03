@@ -1,3 +1,4 @@
+import { Reserva } from './alojamientos.model';
 export class UsuarioModel {
     userID: string;
     nombre: string;
@@ -11,5 +12,5 @@ export class UsuarioModel {
     password?: string;
     nacionalidad?: string;
     genero?: string;
-    reservas?: string[];
+    reservas?: Reserva[];
 }

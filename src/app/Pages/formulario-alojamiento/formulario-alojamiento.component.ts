@@ -32,6 +32,7 @@ export class FormularioAlojamientoComponent implements OnInit {
   fotosAlojamiento: Foto[] = [];
   fotosHabitacion: Foto[] = [];
   habitaciones: Habitacion[] = [];
+  
   //Datos de back
   obtenerAloj: Alojamiento[];
   alojamiento: Alojamiento;
@@ -99,26 +100,26 @@ export class FormularioAlojamientoComponent implements OnInit {
     
     
   }
+  //Añade un filtro al alojamiento
   filtrado(e: MatAutocompleteSelectedEvent){
     this.filtros.push({filtros:e.option.viewValue});
     this.filtrosInput.nativeElement.value = '';
   }
 
-
+//Añade una caracteristica a la habitacion
   addCaracteristica(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
-
-    // Add our fruit
+   
     if ((value || '').trim()) {
       this.caracteristicas.push({caracteristica: value.trim()});
     }
 
-    // Reset the input value
     if (input) {
       input.value = '';
     }
   }
+  //Borra un filtro de un alojamiento del array
   removeFiltro(filtro: Filtro): void {
     const index = this.filtros.indexOf(filtro);
     
@@ -126,6 +127,7 @@ export class FormularioAlojamientoComponent implements OnInit {
       this.filtros.splice(index, 1);
     }
   }
+  //Borra una caracteristica de una habitacion del array
   removeCaracteristica(caracteristica: Caracteristica): void {
     const index = this.caracteristicas.indexOf(caracteristica);
     
@@ -133,16 +135,15 @@ export class FormularioAlojamientoComponent implements OnInit {
       this.caracteristicas.splice(index, 1);
     }
   }
-
-  guardarAlojamiento(){
-    console.log(this.alojamiento);
-    
-    //  this._alojServ.crearAlojamiento(this.alojamiento).subscribe((data)=>{
-    //    console.log(data);
-    //      this.router.navigateByUrl('/perfil');
-    //  });
+//Guarda el alojamiento en la base de datos
+  guardarAlojamiento(){  
+      this._alojServ.crearAlojamiento(this.alojamiento).subscribe((data)=>{
+        console.log(data);
+          this.router.navigateByUrl('/perfil');
+      });
 
   }
+  //Crea un alojamiento
   crearAlojamiento(){
     if (this.alojamiento == undefined) {
       this.alojamiento = {};
@@ -157,7 +158,7 @@ export class FormularioAlojamientoComponent implements OnInit {
     this.alojamiento.localizacion = this.AlojamientoFormulario.value.localizacion;
     this.alojamiento.habitaciones = this.habitaciones;
   }
-
+//Crea una habitacion
   anadirHabitacion(){
     this.habitaciones.push({
       nombreHab: this.HabitacionFormulario.value.nombreHab,
@@ -173,7 +174,7 @@ export class FormularioAlojamientoComponent implements OnInit {
     this.caracteristicas = [];
     this.fotosHabitacion = [];
   }
-
+  //Sube las fotos de un alojamiento
   subirFotoAlojamiento(){
     const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
 
@@ -192,6 +193,8 @@ export class FormularioAlojamientoComponent implements OnInit {
 
     fileUpload.click();
   }
+
+  //Sube las fotos de una habitacion
   subirFotoHabitacion(e){
     const fileUpload = document.getElementById('fileUploadH') as HTMLInputElement;
 
@@ -210,7 +213,7 @@ export class FormularioAlojamientoComponent implements OnInit {
 
     fileUpload.click();
   }
-
+  //Borra la foto de un alojamiento
   borrarFotoAlojamiento(foto: Foto){
     var index = this.fotosAlojamiento.indexOf(foto);
     if (index >= 0) {
@@ -218,7 +221,7 @@ export class FormularioAlojamientoComponent implements OnInit {
     }
     this.cloud.borrar(foto.imagenId).subscribe();
   }
-
+  //Borra la foto de una habitacion
   borrarFotoHabitacion(foto: Foto){
     var index = this.fotosHabitacion.indexOf(foto);
     if (index >= 0) {
@@ -226,7 +229,7 @@ export class FormularioAlojamientoComponent implements OnInit {
     }
     this.cloud.borrar(foto.imagenId).subscribe();
   }
-
+  //Borra una habitacion seleccionada
   borrarHabitacion(habitacion: Habitacion){
       var index = this.habitaciones.indexOf(habitacion);
       if(index >= 0){
@@ -237,7 +240,7 @@ export class FormularioAlojamientoComponent implements OnInit {
       }
   }
 
-
+  //getters para las validaciones del formulario
   get nombreAloj(){return this.AlojamientoFormulario.get('nombreAloj');}
   get descripcionAloj(){return this.AlojamientoFormulario.get('descripcionAloj');}
   get estrellas(){return this.AlojamientoFormulario.get('estrellas');}

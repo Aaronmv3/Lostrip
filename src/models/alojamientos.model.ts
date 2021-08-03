@@ -7,6 +7,14 @@ export interface Foto {
   url: string;
   imagenId: string;
 }
+
+export interface Reserva {
+  id?: number;
+  alojamientoId: number;
+  fechaEntrada: string;
+  fechaSalida: string;
+  personas: number;
+}
 export interface Alojamiento{
     nombre?: string;
     dueno?: string;

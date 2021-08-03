@@ -24,7 +24,7 @@
     <div class="informacionBusqueda">
         <h1>{{busqueda.busqueda}}: {{alojamientos.length}} alojamientos</h1>
         <div class="card-group">
-            <app-alojamiento-tarjeta class="tarjeta" [Alojamiento]="Alojamiento" [habitaciones]="this.busqueda.numHabitaciones" *ngFor="let Alojamiento of alojamientos | slice: (page-1) * pageSize : page * pageSize | sortBy: ordenacion: valor"></app-alojamiento-tarjeta>
+            <app-alojamiento-tarjeta class="tarjeta" [Alojamiento]="Alojamiento" [busqueda]="busqueda" [habitaciones]="this.busqueda.numHabitaciones" *ngFor="let Alojamiento of alojamientos | slice: (page-1) * pageSize : page * pageSize | sortBy: ordenacion: valor"></app-alojamiento-tarjeta>
         </div>
         <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="alojamientos.length" class="d-flex justify-content-center"></ngb-pagination>
     </div>

@@ -1,7 +1,16 @@
-<div class="comentarios" *ngIf="!load">
+<div class="comentarios" *ngIf="!load && ruta != '/comentarios'">
     <div class="datosUsuario">
         <img [src]="usuario.fotoPerfil" alt="foto">
         <p class="nombre">{{usuario.nombre}}</p>
     </div>
     <p class="comentario text-secondary">"{{comentarios.comentario}}"</p>
+</div>
+
+<div class="comentarios pestana" *ngIf="ruta == '/comentarios'">
+    <div class="valoracion">
+        <p class="nombre">Puntuacion: {{comentarios.valoracion}}</p>
+    </div>
+    <div class="cuerpo">
+        <p class="texto text-secondary">"{{comentarios.comentario}}"</p>
+    </div>
 </div>

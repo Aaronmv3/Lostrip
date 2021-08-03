@@ -14,12 +14,13 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-
+//Variables
+  //variables locales
   usuario: UsuarioModel;
   usuarioNuevo: UsuarioModel;
-  recordarme = false;
   captcha: string;
-
+  //booleanos
+  recordarme = false;
   constructor(private auth: AuthService, private router: Router, private userServ: UsuariosService) { }
 
   ngOnInit() {
@@ -27,6 +28,7 @@ export class RegistroComponent implements OnInit {
     this.usuario = new UsuarioModel();
 
   }
+  //Crea un usuario en firebase y lo crea tambien en la base de datos, tambien envia un correo de verificacion
   onSubmit(form: NgForm){
     if (form.invalid){ return; }
 

@@ -31,7 +31,7 @@ export class FooterComponent implements OnInit {
     
   }
 
-  
+  //Guarda que aceptaste las cookies y cuenta las veces que se accedio a la pagina
   aceptarCookies(){
     this.aceptada = 'none';
     this.vecesEntrado = 1

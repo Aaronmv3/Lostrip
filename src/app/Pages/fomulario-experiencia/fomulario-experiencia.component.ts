@@ -87,12 +87,12 @@ export class FormularioExperienciaComponent implements OnInit {
       }
       }, 500);   
     }
-
+//Introduce filtros en el array
     filtrado(e: MatAutocompleteSelectedEvent){
       this.filtros.push({filtros:e.option.viewValue});
       this.filtrosInput.nativeElement.value = '';
     }
-
+//Elimina un filtro del array
     removeFiltro(filtro: Filtro): void {
       const index = this.filtros.indexOf(filtro);
       
@@ -100,13 +100,13 @@ export class FormularioExperienciaComponent implements OnInit {
         this.filtros.splice(index, 1);
       }
     }
-
+//Sube la experiencia a la base de datos
     guardarExperiencia(){
        this._expServ.crearExperiencia(this.experiencia).subscribe((data)=>{
            this.router.navigateByUrl('/perfil');
        });
    }
-
+//Crea una experiencia
    crearExperiencia(){
     if (this.experiencia == undefined) {
       this.experiencia = {};
@@ -121,6 +121,7 @@ export class FormularioExperienciaComponent implements OnInit {
     this.experiencia.localizacion = this.experienciaFormulario.value.localizacion;
   }
 
+//Sube al servidor las fotos seleccionadas
   subirFotoExperiencia(){
     const fileUpload = document.getElementById('fileUpload') as HTMLInputElement;
 
@@ -139,7 +140,7 @@ export class FormularioExperienciaComponent implements OnInit {
 
     fileUpload.click();
   }
-
+  //Elimina la foto seleccionada
   borrarFotoExperiencia(foto: Foto){
     var index = this.fotosExperiencia.indexOf(foto);
     if (index >= 0) {
@@ -148,6 +149,7 @@ export class FormularioExperienciaComponent implements OnInit {
     this.cloud.borrar(foto.imagenId).subscribe();
   }
 
+  //Getters para las validaciones del formulario
   get nombreExp(){return this.experienciaFormulario.get('nombreExp');}
   get descripcionExp(){return this.experienciaFormulario.get('descripcionExp');}
   get estrellas(){return this.experienciaFormulario.get('estrellas');}

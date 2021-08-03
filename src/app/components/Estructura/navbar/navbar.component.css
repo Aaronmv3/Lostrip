@@ -3,6 +3,9 @@
     text-align: center;
 }
 
+
+/* Media querys */
+
 @media (max-width: 992px) {
     .icono-nav {
         display: unset;

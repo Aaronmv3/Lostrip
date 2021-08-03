@@ -34,7 +34,7 @@
                 {{Alojamiento.descripcion}}
             </p>
             <p class="card-text precio2" *ngIf="Alojamiento.habitaciones != undefined">{{Alojamiento.habitaciones[0].precio * this.habitaciones}}€/noche</p>
-            <p class="card-text valoracion">{{this.puntuacion}} <span class="puntuacion">{{this.Alojamiento.valoracion}}</span></p>
+            <p class="card-text valoracion">{{this.puntuacion}} <span class="puntuacion">{{this.Alojamiento.valoracion.toFixed(1)}}</span></p>
             <div class="boton">
                 <button *ngIf="this.ruta == '/alojamientos' || this.ruta == '/home'" (click)="verAlojamiento()" type="button" class="btn btn-outline-danger btn-block btn-sm ">Descubre este alojamiento</button>
                 <button *ngIf="this.ruta == '/experiencias'" (click)="verExperiencia()" type="button" class="btn btn-outline-danger btn-block btn-sm ">Descubre esta experiencia</button>
@@ -71,5 +71,67 @@
             </div>
         </div>
     </div>
+</div>
+<div class="card animated fadeInRight card2" *ngIf="this.ruta == '/reservas'">
+    <div class="row ">
+        <div class="col-md-7 px-3">
 
+            <h4 class="card-title">{{Alojamiento.nombre}}
+                <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                </ng-template>
+
+                <ngb-rating class="estrellas" [(rate)]="Alojamiento.estrellas" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+            </h4>
+            <p class="card-text descripcion">
+                {{Alojamiento.descripcion}}
+            </p>
+            <p class="card-text valoracion">{{this.puntuacion}} <span class="puntuacion">{{this.Alojamiento.valoracion.toFixed(1)}}</span></p>
+            <div class="boton">
+                <p>Reservado desde el <strong>{{reserva.fechaEntrada}}</strong> hasta el <strong>{{reserva.fechaSalida}}</strong></p>
+                <p>Para <strong>{{reserva.personas}} personas.</strong></p>
+            </div>
+        </div>
+        <div class="col-md-5 imagen-reserva">
+            <img [src]="Alojamiento.fotos[0].url" alt="imagen">
+        </div>
+        <div class="col px-5 boton-cancelar">
+            <button class="btn btn-outline-danger" (click)="cancelarReserva(reserva)">Cancelar reserva</button>
+            <button class="btn btn-outline-primary" (click)="comentarioMostrar = true">Añadir comentario</button>
+        </div>
+    </div>
+    <div class="comentario animated fadeIn" *ngIf="comentarioMostrar">
+        <h1>Agregar comentario</h1>
+        <form [formGroup]="comentarioForm">
+            <div>
+                <mat-form-field appearance="outline" class="inputComentario">
+                    <mat-label>Comentario</mat-label>
+                    <textarea matInput formControlName="comentario"></textarea>
+                    <mat-hint align="end">{{comentario.value.length}} / 200</mat-hint>
+                    <mat-error *ngIf="comentario.invalid && (comentario.dirty || comentario.touched)">
+                        <div *ngIf="comentario.errors?.required">
+                            El comentario es obligatorio.
+                        </div>
+                        <div *ngIf="comentario.errors?.minlength">
+                            El comentario debe tener 25 caracteres como minimo.
+                        </div>
+                        <div *ngIf="comentario.errors?.maxlength">
+                            El comentario no puede tener mas de 200 caracteres.
+                        </div>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="slider">
+                <h2>Valoración</h2>
+                <mat-slider class="valoracion" max="10" min="1" step="0.1" thumbLabel="true" formControlName="valoracion">
+                </mat-slider>
+            </div>
+        </form>
+        <div class="botones-form">
+            <button class="btn btn-primary" [disabled]="comentario.invalid" (click)="guardarComentario()">Guardar</button>
+            <button class="btn btn-danger" (click)="comentarioMostrar = false">Cancelar</button>
+        </div>
+    </div>
 </div>

@@ -7,7 +7,7 @@ import { faHome, faHotel, faMosque } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+//Iconos
   faHome = faHome;
   faHotel = faHotel;
   faMosque = faMosque;

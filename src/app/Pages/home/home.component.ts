@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class HomeComponent implements OnInit {
 
-
+  //Variables locales
   alojamientos: Alojamiento[] = [];
   AlojamientosOferta: Alojamiento[] = [];
   mensaje: String;
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   
     setTimeout(()=>{
       this.AlojamientosOferta = this.alojamientos.filter(alojamientos => alojamientos.oferta == true);
-    }, 10)
+    }, 100)
 
     if (sessionStorage.getItem("borrado") == "si") {
       Swal.fire({

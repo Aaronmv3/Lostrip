@@ -205,10 +205,6 @@
         <mat-step>
             <ng-template matStepLabel>Listo!</ng-template>
             <h1 class="titulo-final">Resumen</h1>
-            <h2>Alojamiento</h2>
-            <div class="alojamiento-resumen" *ngIf="alojamiento != undefined">
-                <app-alojamiento-tarjeta [Alojamiento]="alojamiento"></app-alojamiento-tarjeta>
-            </div>
             <h2>Habitaciones</h2>
             <div class="habitaciones">
                 <app-habitacion-tarjeta [habitacion]="habitacion" [alojamiento]="alojamiento" *ngFor="let habitacion of habitaciones" (borrar)="borrarHabitacion($event)"></app-habitacion-tarjeta>
@@ -422,10 +418,6 @@
         <mat-step>
             <ng-template matStepLabel>Listo!</ng-template>
             <h1 class="titulo-final">Resumen</h1>
-            <h2>Alojamiento</h2>
-            <div class="alojamiento-resumen" *ngIf="alojamiento != undefined">
-                <app-alojamiento-tarjeta [Alojamiento]="alojamiento"></app-alojamiento-tarjeta>
-            </div>
             <h2>Habitaciones</h2>
             <div class="habitaciones">
                 <app-habitacion-tarjeta [habitacion]="habitacion" [alojamiento]="alojamiento" *ngFor="let habitacion of habitaciones" (borrar)="borrarHabitacion($event)"></app-habitacion-tarjeta>

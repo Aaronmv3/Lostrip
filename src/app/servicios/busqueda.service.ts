@@ -11,7 +11,7 @@ export class BusquedaService {
 
   constructor( ) {
    }
-
+//Genera una busqueda para poder pasarla entre componentes
   crearBusqueda(dato = "Total", entrada: Date, salida: Date, numHabitaciones = 1, numAdultos: number, numNinos: number){
     if(dato.length == 0){
       dato = "Total"

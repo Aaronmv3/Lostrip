@@ -121,6 +121,9 @@ h2 {
     border-bottom: solid black 1px;
 }
 
+
+/* Media querys */
+
 @media(max-width: 1422px) {
     .numerico {
         margin-left: 0 !important;

@@ -12,13 +12,18 @@ import { Location } from '@angular/common';
   styleUrls: ['./experiencia.component.css']
 })
 export class ExperienciaComponent implements OnInit {
-
-  experiencia: Experiencias;
-  obtenerExp: Experiencias[];
+//Variables
+  //Iconos
   faArrowLeft = faArrowLeft;
   faGift = faGift;
-  load: boolean = true;
+
+  //Variables locales
+  experiencia: Experiencias;
+  obtenerExp: Experiencias[];
   foto: String;
+
+  //Booleanos
+  load: boolean = true;
 
   constructor(private routerAct : ActivatedRoute, private _expServ : ExperienciasService, private location: Location, private modalService: NgbModal, 
     config: NgbCarouselConfig) { 
@@ -46,11 +51,11 @@ export class ExperienciaComponent implements OnInit {
     }, 500);
 
   }
-
+  //Vuelve a la pagina anterior
   atras(){
     this.location.back();
   }
-
+  //Abre una ventana modal con la imagen seleccionada
   openVerticallyCentered(content, foto: String) {
     
     this.foto = foto;

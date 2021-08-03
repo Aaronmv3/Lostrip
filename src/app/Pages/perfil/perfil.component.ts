@@ -106,6 +106,7 @@ export class PerfilComponent implements OnInit {
       this.experiencias = this._expServ.getExperiencias();
     }, 600);
   }
+
   search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
   text$.pipe(
     debounceTime(200),
@@ -114,6 +115,7 @@ export class PerfilComponent implements OnInit {
       : this.paises.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
   )
 
+//Sube la imagen de perfil del usuario
   async subirImagen(){
     const { value: file } = await Swal.fire({
       title: 'Selecciona imagen de perfil',
@@ -129,13 +131,14 @@ export class PerfilComponent implements OnInit {
       this.actualizarFoto(file.name);
     }
   }
-
+//Actualiza la imagen de perfil
   actualizarFoto(imagen){
     this.usuario.fotoPerfil = "/assets/Imagenes/usuarios/" + this.usuario.userID + imagen;
     this._userService.actualizarUsuario(this.usuario).subscribe((data)=>{
       console.log(data);   
     });
   }
+  //Actualiza los datos del usuario
   actualizarUser(actualizar){
     switch (actualizar) {
       case "nombre":
@@ -169,7 +172,7 @@ export class PerfilComponent implements OnInit {
     });
     window.location.reload();
   }
-
+//Restablece la contraseña del usuario
   async contrasenaRec(){
     
     await Swal.fire({
@@ -183,7 +186,7 @@ export class PerfilComponent implements OnInit {
     }
   });
   }
-
+//Borra la cuenta del usuario
   async borrarCuenta(){
     
     await Swal.fire({
@@ -206,7 +209,7 @@ export class PerfilComponent implements OnInit {
     }
   });
   }
-
+//Abre el formulario para el alojamiento/experiencia nuev@
   abrirFormulario(tipo: String){
     if(tipo == "alojamiento"){
       this.router.navigateByUrl('/formulario-alojamiento');

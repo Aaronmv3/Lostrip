@@ -13,13 +13,13 @@ import { Filtro } from '../../../models/alojamientos.model';
   styleUrls: ['./lista-alojamientos.component.css']
 })
 export class ListaAlojamientosComponent implements OnInit {
-  
+//Variables
+  //Booleanos
   load: boolean = true;
   //Filtros
   alojamientos: Alojamiento[] = [];
   alojamientosBusqueda: Alojamiento[] = [];
   busqueda: busqueda;
-  
 
   //Ordenado
   public shortByForm: FormGroup;

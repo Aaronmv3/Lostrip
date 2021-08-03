@@ -110,6 +110,9 @@ select.form-control+.select-arrow:after {
     margin-left: 15px;
 }
 
+
+/* Media querys */
+
 @media(max-width:992px) {}
 
 @media(max-width:525px) {

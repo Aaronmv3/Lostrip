@@ -70,6 +70,9 @@ h4 {
     float: left;
 }
 
+
+/* Media querys */
+
 @media(max-width:991px) {
     .search-form {
         width: 160%;
@@ -80,23 +83,4 @@ h4 {
     .search-form {
         width: auto;
     }
-}
-
-html::-webkit-scrollbar {
-    -webkit-appearance: none;
-}
-
-html::-webkit-scrollbar:vertical {
-    width: 10px;
-}
-
-html::-webkit-scrollbar-button:increment,
-html::-webkit-scrollbar-button {
-    display: none;
-}
-
-html::-webkit-scrollbar-thumb {
-    background-color: #797979;
-    border-radius: 20px;
-    border: 2px solid #f1f2f3;
 }

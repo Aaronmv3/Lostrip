@@ -40,8 +40,8 @@
         </button>
             <div class="dropdown-menu  dropdown-menu-right">
                 <a class="dropdown-item" [routerLink]="['perfil']">Perfil</a>
-                <a class="dropdown-item" href="#">Reservas</a>
-                <a class="dropdown-item" href="#">Comentarios</a>
+                <a class="dropdown-item" [routerLink]="['reservas']">Reservas</a>
+                <a class="dropdown-item" [routerLink]="['comentarios']">Comentarios</a>
                 <div class="dropdown-divider"></div>
                 <div class="card">
                     <button (click)="logout()" type="button" class="btn btn-danger">Desconectar</button>

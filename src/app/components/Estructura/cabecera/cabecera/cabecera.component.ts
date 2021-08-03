@@ -11,16 +11,18 @@ import { UsuariosService } from '../../../../servicios/usuarios.service';
   styleUrls: ['./cabecera.component.css']
 })
 export class CabeceraComponent implements OnInit {
+  //Variables
     // Importacion de iconos
     faFacebookF = faFacebookF;
     faTwitter = faTwitter;
     faGooglePlus = faGooglePlus;
 
-    //variables
+    //variables locales
     render = false;
     usuario : UsuarioModel;
     obteneruser: UsuarioModel[];
     uid: string;
+    //Booleanos
     autenticado: boolean;
   constructor(private _authservice: AuthService, private router: Router, private _userService: UsuariosService) {
   }
@@ -42,7 +44,7 @@ export class CabeceraComponent implements OnInit {
     }
 
   }
-
+  //Hacer logout del usuario actual
   logout(){
     this._authservice.logout();
     this.autenticado = false;

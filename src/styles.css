@@ -43,6 +43,9 @@ body {
     animation-name: fadeIn;
 }
 
+
+/* Modifica la barra de scroll */
+
 html::-webkit-scrollbar {
     -webkit-appearance: none;
 }
@@ -70,5 +73,13 @@ html::-webkit-scrollbar-track {
 html {
     overflow-x: hidden;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}

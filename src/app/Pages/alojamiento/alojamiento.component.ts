@@ -16,15 +16,24 @@ import { UsuariosService } from '../../servicios/usuarios.service';
   styleUrls: ['./alojamiento.component.css']
 })
 export class AlojamientoComponent implements OnInit {
-
-  alojamiento: Alojamiento;
-  obtenerAloj: Alojamiento[];
+//Variables
+  //Iconos
   faArrowLeft = faArrowLeft;
   faGift = faGift;
-  load: boolean = true;
+
+  //variables locales
+  alojamiento: Alojamiento;
+  obtenerAloj: Alojamiento[];
   foto: String;
   obtenerUsuario: UsuarioModel[];
+  usuarios: UsuarioModel[];
 
+  //Booleanos
+  load: boolean = true;
+
+  //Paginacion
+  pagina = 1;
+  pageSize = 5;
   constructor(private routerAct : ActivatedRoute, private _alojamientoService : AlojamientosService, private location: Location, private modalService: NgbModal, 
     config: NgbCarouselConfig, private userService: UsuariosService) { 
     config.interval = 10000;
@@ -42,6 +51,7 @@ export class AlojamientoComponent implements OnInit {
         if(sessionStorage.getItem("Logged")){
           this.obtenerUsuario = this.userService.getUsuario(sessionStorage.getItem("Logged"));
         }
+        
         this.load = false;
       }, 600);
       this.routerAct.params.subscribe(params => {
@@ -49,13 +59,12 @@ export class AlojamientoComponent implements OnInit {
         
       });
     }, 500);
-
   } 
-
+  //Vuelve a la pagina anterior
   atras(){
     this.location.back();
   }
-
+  //Abre la foto en una ventana modal
   openVerticallyCentered(content, foto: String) {
     
     this.foto = foto;

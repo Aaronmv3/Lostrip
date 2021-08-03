@@ -18,15 +18,16 @@ export class ListaExperienciasComponent implements OnInit {
   busqueda: busqueda;
   guardarBusquedaExp: Experiencias[] = [];
   guardarPrimBusqueda: Experiencias[];
+  //Booleanos
   primBusqueda: boolean = false;
   filtrado2: boolean = false;
+  load: boolean = true;
 
   //Ordenado
   public shortByForm: FormGroup;
   ordenado: string[] = ['Precio Asc', 'Precio Desc', 'Nombre Asc', 'Nombre Desc'];
   ordenacion: string = "nombre";
   valor: string = "asc";
-  load: boolean = true;
 
   //Paginacion
   page = 1;

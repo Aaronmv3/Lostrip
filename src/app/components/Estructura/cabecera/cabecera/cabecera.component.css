@@ -1,90 +1,94 @@
-   nav {
-       position: sticky !important;
-       top: 0;
-       z-index: 5;
-   }
-   
-   .navbarColor {
-       background: #16222A;
-       background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
-       background: linear-gradient(59deg, #3A6073, #16222A);
-       color: white;
-   }
-   
-   .navbarColor>a {
-       color: white;
-       font-size: 30px;
-   }
-   
-   .dropdown-menu {
-       position: absolute;
-       background-color: rgba(255, 255, 255, 1);
-       border: 0px;
-   }
-   
-   .dropdown-menu-right a:hover {
-       background-color: rgb(128, 128, 128);
-       color: white;
-   }
-   
-   .btn img {
-       width: 30px;
-       height: 30px;
-       border-radius: 150px;
-   }
-   
-   .btn-centro {
-       position: relative;
-       left: 39%;
-   }
-   
-   .dropdown-menu-center {
-       left: 50%;
-       transform: translateX(-50%);
-       width: 300%;
-       height: 200px;
-   }
-   
-   .dropdown-menu-center a:hover {
-       color: orangered;
-   }
-   
-   .card {
-       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-       max-width: 300px;
-       margin: auto;
-       text-align: center;
-       font-family: arial;
-       margin-top: -4px;
-   }
-   
-   .card h1 {
-       font-weight: bold;
-       font-size: 25px;
-   }
-   
-   .title {
-       color: grey;
-       font-size: 18px;
-   }
-   
-   .icono-tarjeta {
-       text-decoration: none;
-       font-size: 22px;
-       color: black;
-       width: 10%;
-       padding-right: 10px;
-       margin-left: 10px;
-       padding-bottom: 5px;
-   }
-   
-   button:hover,
-   a:hover {
-       opacity: 0.7;
-   }
-   
-   @media (max-width: 767px) {
-       .btn-centro {
-           display: none;
-       }
-   }
+ /* Navbar */
+ 
+ nav {
+     position: sticky !important;
+     top: 0;
+     z-index: 5;
+ }
+ 
+ .navbarColor {
+     background: #16222A;
+     background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
+     background: linear-gradient(59deg, #3A6073, #16222A);
+     color: white;
+ }
+ 
+ .navbarColor>a {
+     color: white;
+     font-size: 30px;
+ }
+ 
+ .dropdown-menu {
+     position: absolute;
+     background-color: rgba(255, 255, 255, 1);
+     border: 0px;
+ }
+ 
+ .dropdown-menu-right a:hover {
+     background-color: rgb(128, 128, 128);
+     color: white;
+ }
+ 
+ .btn img {
+     width: 30px;
+     height: 30px;
+     border-radius: 150px;
+ }
+ 
+ .btn-centro {
+     position: relative;
+     left: 39%;
+ }
+ 
+ .dropdown-menu-center {
+     left: 50%;
+     transform: translateX(-50%);
+     width: 300%;
+     height: 200px;
+ }
+ 
+ .dropdown-menu-center a:hover {
+     color: orangered;
+ }
+ /* Tarjeta de contacto */
+ 
+ .card {
+     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+     max-width: 300px;
+     margin: auto;
+     text-align: center;
+     font-family: arial;
+     margin-top: -4px;
+ }
+ 
+ .card h1 {
+     font-weight: bold;
+     font-size: 25px;
+ }
+ 
+ .title {
+     color: grey;
+     font-size: 18px;
+ }
+ 
+ .icono-tarjeta {
+     text-decoration: none;
+     font-size: 22px;
+     color: black;
+     width: 10%;
+     padding-right: 10px;
+     margin-left: 10px;
+     padding-bottom: 5px;
+ }
+ 
+ button:hover,
+ a:hover {
+     opacity: 0.7;
+ }
+ /* Media querys */
+ 
+ @media (max-width: 767px) {
+     .btn-centro {
+         display: none;
+     }
+ }

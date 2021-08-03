@@ -12,12 +12,15 @@ export class FiltrosBusquedaComponent implements OnInit {
 
   @Output() filtrado = new EventEmitter<any>();
   public filterForm: FormGroup;
-
-  filtroPanelOpenState = false
-  filtros: string[] = ['Playa', 'Montaña', 'Ciudad', 'Piscina', 'Centro', 'Wifi', 'Admite mascotas', 'Fumadores'];
-  filtros2: string[] = ['Jardin', 'Naturaleza', 'Playa', 'Tematico', 'Bosque', 'Atracciones'];
-  ruta: string;
-
+  //Variables
+    //Booleanos
+    filtroPanelOpenState = false
+    //Arrays
+    filtros: string[] = ['Playa', 'Montaña', 'Ciudad', 'Piscina', 'Centro', 'Wifi', 'Admite mascotas', 'Fumadores'];
+    filtros2: string[] = ['Jardin', 'Naturaleza', 'Playa', 'Tematico', 'Bosque', 'Atracciones'];
+    //Variables locales
+    ruta: string;
+  
   constructor(private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
@@ -28,6 +31,8 @@ export class FiltrosBusquedaComponent implements OnInit {
 
     this.ruta = this.router.url;
   }
+
+  //Envia al componente padre los datos del filtro
   enviar(){
    this.filtrado.emit(this.filterForm.value.filtros);
     

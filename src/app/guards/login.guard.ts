@@ -8,7 +8,7 @@ import { UsuariosService } from '../servicios/usuarios.service';
 
 export class LoginGuard implements CanActivate {
   constructor(private user: UsuariosService, private router: Router){}
-
+  //Valida si el usuario esta loggeado y lo redirige a home si lo está
   canActivate(): boolean  {
     if(sessionStorage.getItem("Logged") && sessionStorage.getItem("Logged").length == 28 ){
       this.router.navigateByUrl("/home")

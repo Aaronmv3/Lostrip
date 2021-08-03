@@ -14,6 +14,7 @@ export class AlojamientosService {
     this.alojURL = 'http://localhost:8080/alojamiento';
   }
 
+//Devuelve un array con todos los alojamientos que hay en la base de datos
   getAlojamientos(){
 
     this.alojamientos = [];
@@ -42,7 +43,7 @@ export class AlojamientosService {
     
   }
 
-  
+  //Devuelve un array con un alojamiento en concreto
   getAlojamiento(id: string){
     this.alojamientos = [];
     this.http.get<Alojamiento>(this.alojURL + "/" + id).subscribe(data =>{
@@ -67,7 +68,7 @@ export class AlojamientosService {
     return this.alojamientos;
    
   }
-
+//Sistema de busqueda para filtrar alojamientos
   buscarAlojamiento( busqueda: string){
     if(busqueda == "Total"){
 
@@ -80,11 +81,11 @@ export class AlojamientosService {
         return busquedaAlojamiento;
       }
     }
-
+//Crea un alojamiento en la base de datos
   crearAlojamiento(alojamiento: Alojamiento){
     return this.http.post<any>(this.alojURL, alojamiento);
   }
-
+//Borra un alojamiento de la base de datos
   deleteAlojamiento(alojamiento: Alojamiento){
     return this.http.post<any>(this.alojURL + "/borrar", alojamiento);
   }

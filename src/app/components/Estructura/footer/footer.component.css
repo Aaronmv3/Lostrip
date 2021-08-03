@@ -64,6 +64,7 @@
       left: 25%;
       padding: 10px;
   }
+  /* Media querys */
   
   @media(max-width:330px) {
       .cookies button {

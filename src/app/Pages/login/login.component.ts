@@ -14,11 +14,12 @@ import Swal from 'sweetalert2';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  
+//Variables
+  //Variables locales
   usuario: UsuarioModel = new UsuarioModel();
-  recordarme = false;
   captcha: string;
-
+  //Booleanos
+  recordarme = false;
   constructor(private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
       this.recordarme = true;
     }
   }
-
+//Te loggeas en firebase y en la base de datos
   login(form: NgForm) {
     if (form.invalid){ return; }
 
@@ -78,7 +79,7 @@ export class LoginComponent implements OnInit {
       });
     });
   }
-
+//Correo de recuperacion de contraseñas
   async contrasenaRec(){
     
     const { value: email } = await Swal.fire({
